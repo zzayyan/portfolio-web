@@ -1,0 +1,195 @@
+/* ═══════════════════════════════════════
+   PROJECTS — 2-Column Card Grid
+   ═══════════════════════════════════════ */
+
+.section {
+  background-color: var(--color-ground);
+  color: var(--color-mass);
+  padding-top: var(--section-padding);
+  padding-bottom: var(--section-padding);
+  padding-left: var(--grid-margin);
+  padding-right: var(--grid-margin);
+}
+
+/* ─── Section Header ─── */
+.header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--color-mass);
+  padding-bottom: 24px;
+  margin-bottom: 48px;
+}
+
+.headerTitle {
+  font-family: var(--font-display-family);
+  font-weight: 900;
+  font-size: var(--t-h1);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--color-mass);
+}
+
+.headerCounter {
+  font-family: var(--font-mono-family);
+  font-size: var(--t-meta);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-mass);
+  white-space: nowrap;
+}
+
+/* ─── 2-Column Grid ─── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+}
+
+/* ─── Project Card ─── */
+.card {
+  border: 1px solid var(--color-mass);
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 380px;
+  text-decoration: none;
+  color: var(--color-mass);
+  transition: none;
+}
+
+/* Hover inversion */
+.card:hover {
+  background-color: var(--color-mass);
+  color: var(--color-ground);
+}
+
+/* Cursor swap on hover (light → dark bg needs white cursor) */
+.card:hover,
+.card:hover * {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cline x1='12' y1='0' x2='12' y2='24' stroke='%23fff' stroke-width='1'/%3E%3Cline x1='0' y1='12' x2='24' y2='12' stroke='%23fff' stroke-width='1'/%3E%3C/svg%3E") 12 12, crosshair;
+}
+
+.card:hover .cardTag {
+  border-color: var(--color-ground);
+  color: var(--color-ground);
+}
+
+/* ─── Card Header ─── */
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+
+.cardIndex {
+  font-family: var(--font-mono-family);
+  font-size: var(--t-h3);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.cardYear {
+  font-family: var(--font-mono-family);
+  font-size: var(--t-meta);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.5;
+}
+
+/* ─── Card Body ─── */
+.cardBody {
+  flex-grow: 1;
+  margin-bottom: 32px;
+}
+
+.cardTitle {
+  font-family: var(--font-display-family);
+  font-weight: 900;
+  font-size: var(--t-h3);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+
+.cardDescription {
+  font-family: var(--font-body-family);
+  font-size: var(--t-body);
+  font-weight: 400;
+  line-height: 1.6;
+  opacity: 0.8;
+}
+
+/* ─── Card Footer ─── */
+.cardFooter {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  border-top: 1px solid currentColor;
+  padding-top: 24px;
+}
+
+.cardTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.cardTag {
+  font-family: var(--font-mono-family);
+  font-size: var(--t-meta);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: 1px solid var(--color-mass);
+  padding: 3px 10px;
+}
+
+/* CTA with animated arrow */
+.cardCta {
+  font-family: var(--font-mono-family);
+  font-size: var(--t-meta);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.cardCta::after {
+  content: "→";
+  display: inline-block;
+  transition: transform 200ms var(--ease-out-expo);
+}
+
+.card:hover .cardCta::after {
+  transform: translateX(6px);
+}
+
+/* ─── Responsive: Mobile ─── */
+@media (max-width: 767px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .card {
+    padding: 24px;
+    min-height: 300px;
+  }
+
+  .cardFooter {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+}

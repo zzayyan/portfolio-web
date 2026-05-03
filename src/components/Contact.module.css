@@ -1,0 +1,128 @@
+/* ═══════════════════════════════════════
+   CONTACT — Light Section
+   ═══════════════════════════════════════ */
+
+.section {
+  background-color: var(--color-ground);
+  color: var(--color-mass);
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: var(--section-padding) var(--grid-margin);
+  position: relative;
+}
+
+/* ─── Central Block ─── */
+.ctaBlock {
+  text-align: center;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.ctaHeadline {
+  font-family: var(--font-display-family);
+  font-weight: 900;
+  font-size: clamp(4rem, 11vw, 9rem);
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+  color: var(--color-mass);
+  margin-bottom: 64px;
+}
+
+.ctaDivider {
+  width: 100%;
+  height: 1px;
+  background-color: var(--color-mass);
+  margin-bottom: 32px;
+}
+
+/* ─── Contact Links ─── */
+.contactLinks {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0;
+}
+
+.contactLink {
+  font-family: var(--font-mono-family);
+  font-size: var(--t-sub);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-mass);
+  text-decoration: none;
+  padding: 8px 16px;
+  transition: none;
+}
+
+.contactLink:hover {
+  background-color: var(--color-mass);
+  color: var(--color-ground);
+}
+
+.linkSeparator {
+  font-family: var(--font-mono-family);
+  font-size: var(--t-sub);
+  color: var(--color-mass);
+  padding: 0 16px;
+  user-select: none;
+}
+
+/* ─── Footer Strip ─── */
+.footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  border-top: 1px solid var(--color-mass);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--grid-margin);
+  font-family: var(--font-mono-family);
+  font-size: var(--t-meta);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-mass);
+}
+
+/* ─── Responsive: Mobile ─── */
+@media (max-width: 767px) {
+  .ctaHeadline {
+    font-size: clamp(2.5rem, 14vw, 4rem);
+    margin-bottom: 40px;
+  }
+
+  .contactLinks {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .linkSeparator {
+    display: none;
+  }
+
+  .contactLink {
+    font-size: var(--t-body);
+    padding: 12px 16px;
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid var(--color-mass);
+  }
+
+  .contactLink:last-child {
+    border-bottom: none;
+  }
+
+  .footer {
+    flex-direction: column;
+    height: auto;
+    padding: 16px var(--grid-margin);
+    gap: 4px;
+    text-align: center;
+  }
+}

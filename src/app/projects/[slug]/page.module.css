@@ -1,0 +1,252 @@
+/* ═══════════════════════════════════════
+   PROJECT DETAIL PAGE
+   ═══════════════════════════════════════ */
+
+.page {
+  padding-top: calc(var(--nav-height) + 80px);
+  padding-bottom: var(--section-padding);
+  padding-left: var(--grid-margin);
+  padding-right: var(--grid-margin);
+  min-height: 100svh;
+  background-color: var(--color-ground);
+  color: var(--color-mass);
+}
+
+/* ─── Back Link ─── */
+.backLink {
+  font-family: var(--font-mono-family);
+  font-size: var(--t-meta);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-mass);
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 48px;
+  padding: 8px 16px;
+  border: 1px solid var(--color-mass);
+  transition: none;
+}
+
+.backLink:hover {
+  background-color: var(--color-mass);
+  color: var(--color-ground);
+}
+
+/* ─── Header ─── */
+.header {
+  margin-bottom: 64px;
+}
+
+.projectIndex {
+  font-family: var(--font-mono-family);
+  font-size: var(--t-meta);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-mass);
+  opacity: 0.7;
+  display: block;
+  margin-bottom: 16px;
+}
+
+.projectTitle {
+  font-family: var(--font-display-family);
+  font-weight: 900;
+  font-size: var(--t-h1);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--color-mass);
+  margin-bottom: 24px;
+}
+
+.projectType {
+  font-family: var(--font-mono-family);
+  font-size: var(--t-caption);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-mass);
+}
+
+/* ─── Metadata Grid ─── */
+.metaGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  border: 1px solid var(--color-mass);
+  margin-bottom: 64px;
+  background-color: var(--color-mass);
+}
+
+.metaCell {
+  background-color: var(--color-ground);
+  padding: 24px;
+}
+
+.metaLabel {
+  font-family: var(--font-mono-family);
+  font-size: var(--t-meta);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-mass);
+  opacity: 0.7;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.metaValue {
+  font-family: var(--font-body-family);
+  font-size: var(--t-body);
+  font-weight: 700;
+  color: var(--color-mass);
+}
+
+/* ─── Content Grid ─── */
+.contentGrid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: var(--grid-gap);
+  margin-bottom: 64px;
+}
+
+/* ─── Description ─── */
+.descriptionCol {
+  grid-column: 1 / 8;
+}
+
+.sectionLabel {
+  font-family: var(--font-mono-family);
+  font-size: var(--t-meta);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-mass);
+  display: block;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--color-mass);
+}
+
+.descriptionText {
+  font-family: var(--font-body-family);
+  font-weight: 400;
+  font-size: var(--t-body);
+  line-height: 1.7;
+  color: var(--color-mass);
+  margin-bottom: 16px;
+}
+
+.descriptionText:last-child {
+  margin-bottom: 0;
+}
+
+/* ─── Stack List ─── */
+.stackCol {
+  grid-column: 9 / 13;
+}
+
+.stackList {
+  list-style: none;
+  padding: 0;
+}
+
+.stackItem {
+  font-family: var(--font-body-family);
+  font-size: var(--t-body);
+  font-weight: 400;
+  color: var(--color-mass);
+  padding: 12px 0;
+  border-bottom: 1px solid var(--color-mass);
+}
+
+.stackItem:last-child {
+  border-bottom: none;
+}
+
+/* ─── Architecture Diagram ─── */
+.diagramSection {
+  border: 1px solid var(--color-mass);
+  padding: 48px;
+  margin-bottom: 64px;
+  background-color: var(--color-mass);
+  color: var(--color-ground);
+}
+
+.diagramLabel {
+  font-family: var(--font-mono-family);
+  font-size: var(--t-meta);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-ground);
+  display: block;
+  margin-bottom: 32px;
+}
+
+.diagram {
+  font-family: var(--font-mono-family);
+  font-size: 13px;
+  line-height: 1.5;
+  white-space: pre;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--color-ground);
+  overflow-x: auto;
+}
+
+/* ─── Pattern ─── */
+.patternSection {
+  border-top: 1px solid var(--color-mass);
+  padding-top: 32px;
+}
+
+.patternText {
+  font-family: var(--font-mono-family);
+  font-size: var(--t-caption);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-mass);
+}
+
+/* ─── Responsive: Tablet ─── */
+@media (max-width: 1279px) {
+  .metaGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .descriptionCol {
+    grid-column: 1 / 8;
+  }
+
+  .stackCol {
+    grid-column: 9 / 13;
+  }
+}
+
+/* ─── Responsive: Mobile ─── */
+@media (max-width: 767px) {
+  .metaGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .contentGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .descriptionCol {
+    grid-column: 1 / -1;
+    margin-bottom: 48px;
+  }
+
+  .stackCol {
+    grid-column: 1 / -1;
+  }
+
+  .projectTitle {
+    font-size: var(--t-h2);
+  }
+
+  .diagramSection {
+    padding: 24px;
+  }
+
+  .diagram {
+    font-size: 10px;
+  }
+}

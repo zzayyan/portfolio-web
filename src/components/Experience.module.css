@@ -1,0 +1,170 @@
+/* ═══════════════════════════════════════
+   EXPERIENCE — Work History (CV-style)
+   ═══════════════════════════════════════ */
+
+.section {
+  background-color: var(--color-mass);
+  color: var(--color-ground);
+  padding-top: var(--section-padding);
+  padding-bottom: var(--section-padding);
+  padding-left: var(--grid-margin);
+  padding-right: var(--grid-margin);
+}
+
+/* ─── Header ─── */
+.headerTitle {
+  font-family: var(--font-display-family);
+  font-weight: 900;
+  font-size: var(--t-h1);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--color-ground);
+  margin-bottom: 48px;
+}
+
+/* ─── Experience Entry ─── */
+.entry {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid var(--color-ground);
+  padding: 40px 0;
+}
+
+.entry:first-of-type {
+  border-top: 1px solid var(--color-ground);
+}
+
+/* ─── Left Column — Period + Company Meta ─── */
+.entryMeta {
+  width: 28%;
+  min-width: 200px;
+  padding-right: 48px;
+  border-right: 1px solid var(--color-ground);
+  flex-shrink: 0;
+}
+
+.period {
+  font-family: var(--font-mono-family);
+  font-size: var(--t-meta);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-ground);
+  display: block;
+  margin-bottom: 16px;
+}
+
+.company {
+  font-family: var(--font-display-family);
+  font-weight: 900;
+  font-size: var(--t-h3);
+  letter-spacing: -0.02em;
+  color: var(--color-ground);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.location {
+  font-family: var(--font-mono-family);
+  font-size: var(--t-meta);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-ground);
+  opacity: 0.7;
+  display: block;
+}
+
+/* ─── Right Column — Role + Description ─── */
+.entryContent {
+  flex-grow: 1;
+  padding-left: 48px;
+}
+
+.role {
+  font-family: var(--font-body-family);
+  font-weight: 700;
+  font-size: var(--t-lead);
+  color: var(--color-ground);
+  display: block;
+  margin-bottom: 16px;
+}
+
+.description {
+  list-style: none;
+  padding: 0;
+}
+
+.description li {
+  font-family: var(--font-body-family);
+  font-weight: 400;
+  font-size: var(--t-body);
+  color: var(--color-ground);
+  line-height: 1.6;
+  padding-left: 20px;
+  position: relative;
+  margin-bottom: 8px;
+}
+
+.description li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--color-ground);
+  opacity: 0.5;
+}
+
+.description li:last-child {
+  margin-bottom: 0;
+}
+
+/* ─── Tags ─── */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.tag {
+  font-family: var(--font-mono-family);
+  font-size: var(--t-meta);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: 1px solid var(--color-ground);
+  padding: 4px 12px;
+  color: var(--color-ground);
+}
+
+/* ─── Responsive: Tablet ─── */
+@media (max-width: 1279px) {
+  .entryMeta {
+    width: 30%;
+    min-width: 160px;
+    padding-right: 32px;
+  }
+
+  .entryContent {
+    padding-left: 32px;
+  }
+}
+
+/* ─── Responsive: Mobile ─── */
+@media (max-width: 767px) {
+  .entry {
+    flex-direction: column;
+    padding: 24px 0;
+  }
+
+  .entryMeta {
+    width: 100%;
+    min-width: unset;
+    border-right: none;
+    border-bottom: 1px solid var(--color-ground);
+    padding-right: 0;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+  }
+
+  .entryContent {
+    padding-left: 0;
+  }
+}

@@ -1,0 +1,209 @@
+/* ═══════════════════════════════════════
+   NAVIGATION — Fixed Header + Live Clock
+   ═══════════════════════════════════════ */
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  height: var(--nav-height);
+  background-color: var(--color-ground);
+  border-bottom: 1px solid var(--color-mass);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--grid-margin);
+}
+
+/* ─── Logotype ─── */
+.logotype {
+  font-family: var(--font-mono-family);
+  font-size: var(--t-meta);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-mass);
+  white-space: nowrap;
+}
+
+/* ─── Right Side Container ─── */
+.navRight {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+/* ─── Desktop Nav Links ─── */
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  list-style: none;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+}
+
+.separator {
+  font-family: var(--font-mono-family);
+  font-size: var(--t-meta);
+  color: var(--color-mass);
+  padding: 0 12px;
+  user-select: none;
+}
+
+.navLink {
+  font-family: var(--font-mono-family);
+  font-size: var(--t-meta);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-mass);
+  text-decoration: none;
+  padding: 4px 0;
+}
+
+.navLink:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Active state — wrapped in brackets [LINK_] */
+.navLinkActive {
+  composes: navLink;
+}
+
+.navLinkActive::before {
+  content: "[";
+}
+
+.navLinkActive::after {
+  content: "]";
+}
+
+/* ─── Live Clock ─── */
+.clock {
+  font-family: var(--font-mono-family);
+  font-size: var(--t-meta);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: var(--color-mass);
+  opacity: 0.5;
+  white-space: nowrap;
+  border-left: 1px solid var(--color-mass);
+  padding-left: 24px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─── Hamburger Button (Mobile) ─── */
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  position: relative;
+}
+
+.hamburgerLine {
+  display: block;
+  width: 100%;
+  height: 1px;
+  background-color: var(--color-mass);
+  position: absolute;
+  left: 0;
+  transition: none;
+}
+
+.hamburgerLine:nth-child(1) {
+  top: 8px;
+}
+
+.hamburgerLine:nth-child(2) {
+  top: 15px;
+}
+
+.hamburgerLine:nth-child(3) {
+  top: 22px;
+}
+
+/* Open state — X shape */
+.hamburgerOpen .hamburgerLine:nth-child(1) {
+  top: 15px;
+  transform: rotate(45deg);
+}
+
+.hamburgerOpen .hamburgerLine:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburgerOpen .hamburgerLine:nth-child(3) {
+  top: 15px;
+  transform: rotate(-45deg);
+}
+
+/* ─── Mobile Overlay ─── */
+.mobileOverlay {
+  display: none;
+}
+
+/* ─── Mobile Breakpoint ─── */
+@media (max-width: 767px) {
+  .navRight {
+    display: none;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  .mobileOverlay {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--color-ground);
+    z-index: 999;
+    padding: 0 var(--grid-margin);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .mobileOverlayOpen {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .mobileLink {
+    font-family: var(--font-display-family);
+    font-weight: 900;
+    font-size: var(--t-h2);
+    letter-spacing: -0.04em;
+    color: var(--color-mass);
+    text-decoration: none;
+    display: block;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--color-mass);
+    width: 100%;
+  }
+
+  .mobileLink:first-child {
+    border-top: 1px solid var(--color-mass);
+  }
+
+  .mobileLink:hover {
+    background-color: var(--color-mass);
+    color: var(--color-ground);
+  }
+}

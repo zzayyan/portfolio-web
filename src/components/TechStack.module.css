@@ -1,0 +1,227 @@
+/* ═══════════════════════════════════════
+   TECH STACK — Dark Section
+   ═══════════════════════════════════════ */
+
+.section {
+  background-color: var(--color-mass);
+  color: var(--color-ground);
+  padding-top: var(--section-padding);
+  padding-bottom: var(--section-padding);
+  padding-left: var(--grid-margin);
+  padding-right: var(--grid-margin);
+}
+
+/* ─── Section Header ─── */
+.header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 48px;
+}
+
+.headerTitle {
+  font-family: var(--font-display-family);
+  font-weight: 900;
+  font-size: var(--t-h1);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--color-ground);
+}
+
+.headerLabel {
+  font-family: var(--font-mono-family);
+  font-size: var(--t-meta);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-ground);
+  white-space: nowrap;
+}
+
+/* ─── Registry Table ─── */
+.table {
+  width: 100%;
+  border: 1px solid var(--color-ground);
+  border-collapse: collapse;
+}
+
+.table th {
+  font-family: var(--font-mono-family);
+  font-size: var(--t-meta);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 400;
+  text-align: left;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--color-ground);
+  color: var(--color-ground);
+}
+
+.table td {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--color-ground);
+  vertical-align: top;
+}
+
+/* Row hover — instant inversion */
+.table tbody tr {
+  transition: none;
+}
+
+.table tbody tr:hover {
+  background-color: var(--color-ground);
+  color: var(--color-mass);
+}
+
+.table tbody tr:hover,
+.table tbody tr:hover * {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cline x1='12' y1='0' x2='12' y2='24' stroke='%23000' stroke-width='1'/%3E%3Cline x1='0' y1='12' x2='24' y2='12' stroke='%23000' stroke-width='1'/%3E%3C/svg%3E") 12 12, crosshair;
+}
+
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Column: Category */
+.colCategory {
+  width: 18%;
+  font-family: var(--font-mono-family);
+  font-size: var(--t-meta);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  vertical-align: middle !important;
+  border-right: 1px solid var(--color-ground);
+}
+
+/* Column: Tool */
+.colTool {
+  width: 22%;
+  font-family: var(--font-body-family);
+  font-size: var(--t-body);
+  font-weight: 700;
+}
+
+/* Column: Role */
+.colRole {
+  width: 40%;
+  font-family: var(--font-body-family);
+  font-size: var(--t-body);
+  font-weight: 400;
+}
+
+/* Column: Proficiency */
+.colProficiency {
+  width: 20%;
+  font-family: var(--font-mono-family);
+  font-size: var(--t-meta);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.profBar {
+  letter-spacing: 0.02em;
+}
+
+.profBarFilled {
+  /* Full blocks — use currentColor so it inverts on hover */
+}
+
+.profBarEmpty {
+  opacity: 0.2;
+}
+
+.profLabel {
+  display: block;
+  margin-top: 4px;
+  letter-spacing: 0.1em;
+}
+
+/* ─── Footer Note ─── */
+.footerNote {
+  margin-top: 32px;
+  font-family: var(--font-mono-family);
+  font-size: var(--t-meta);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-ground);
+}
+
+/* ─── Responsive: Tablet — hide proficiency column ─── */
+@media (max-width: 1279px) {
+  .colProficiency,
+  .thProficiency {
+    display: none;
+  }
+
+  .colCategory {
+    width: 22%;
+  }
+
+  .colTool {
+    width: 30%;
+  }
+
+  .colRole {
+    width: 48%;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
+
+/* ─── Responsive: Mobile — stacked definition list ─── */
+@media (max-width: 767px) {
+  .table,
+  .table thead,
+  .table tbody,
+  .table th,
+  .table td,
+  .table tr {
+    display: block;
+  }
+
+  .table thead {
+    display: none;
+  }
+
+  .table tr {
+    border-bottom: 1px solid var(--color-ground);
+    padding: 16px 0;
+  }
+
+  .table td {
+    border-bottom: none;
+    padding: 4px 16px;
+  }
+
+  .colCategory {
+    width: 100%;
+    border-right: none;
+    font-weight: 700;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--color-ground);
+    margin-bottom: 8px;
+  }
+
+  .colTool {
+    width: 100%;
+  }
+
+  .colRole {
+    width: 100%;
+    opacity: 0.7;
+  }
+
+  .colProficiency {
+    display: block;
+    width: 100%;
+    padding-top: 8px;
+  }
+
+  .thProficiency {
+    display: none;
+  }
+}

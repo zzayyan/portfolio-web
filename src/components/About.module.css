@@ -1,0 +1,227 @@
+/* ═══════════════════════════════════════
+   ABOUT — Landing Section (Hero + Bio)
+   Full-viewport intro with photo + metadata
+   ═══════════════════════════════════════ */
+
+.section {
+  background-color: var(--color-ground);
+  color: var(--color-mass);
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: calc(var(--nav-height) + 64px);
+  padding-bottom: 0;
+}
+
+/* ─── Main Grid ─── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: var(--grid-gap);
+  padding-left: var(--grid-margin);
+  padding-right: var(--grid-margin);
+  padding-bottom: var(--section-padding);
+  flex-grow: 1;
+  align-content: center;
+}
+
+/* ─── Left Column (cols 1–4) — Photo + Metadata ─── */
+.leftCol {
+  grid-column: 1 / 5;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── Photo Space ─── */
+.photoWrapper {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border: 1px solid var(--color-mass);
+  margin-bottom: 32px;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--color-ground);
+}
+
+.photoPlaceholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono-family);
+  font-size: var(--t-meta);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-mass);
+  opacity: 0.3;
+}
+
+.photoImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ─── Metadata Block ─── */
+.metaBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.metaEntry {}
+
+.metaLabel {
+  font-family: var(--font-mono-family);
+  font-size: var(--t-meta);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-mass);
+  margin-bottom: 4px;
+  display: block;
+}
+
+.metaValue {
+  font-family: var(--font-body-family);
+  font-size: var(--t-body);
+  font-weight: 400;
+  color: var(--color-mass);
+  display: block;
+}
+
+/* ─── Right Column (cols 6–12) — Name + Bio ─── */
+.rightCol {
+  grid-column: 6 / 13;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.nameTitle {
+  font-family: var(--font-display-family);
+  font-weight: 900;
+  font-size: clamp(3rem, 7vw, 6rem);
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  color: var(--color-mass);
+  margin-bottom: 12px;
+}
+
+.roleTitle {
+  font-family: var(--font-mono-family);
+  font-size: var(--t-caption);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-mass);
+  margin-bottom: 40px;
+  display: block;
+}
+
+.dividerLine {
+  width: 100%;
+  height: 1px;
+  background-color: var(--color-mass);
+  margin-bottom: 40px;
+}
+
+.statement {
+  font-family: var(--font-body-family);
+  font-weight: 400;
+  font-size: var(--t-lead);
+  line-height: 1.6;
+  color: var(--color-mass);
+}
+
+.statement p {
+  margin-bottom: 24px;
+}
+
+.statement p:last-child {
+  margin-bottom: 0;
+}
+
+/* ─── Marquee Ticker ─── */
+.marqueeWrapper {
+  border-top: 1px solid var(--color-mass);
+  overflow: hidden;
+  width: 100%;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.marqueeTrack {
+  display: flex;
+  white-space: nowrap;
+  animation: marquee 60s linear infinite;
+  will-change: transform;
+}
+
+.marqueeContent {
+  font-family: var(--font-mono-family);
+  font-size: var(--t-meta);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-mass);
+  padding: 0 var(--grid-margin);
+  flex-shrink: 0;
+}
+
+/* ─── Responsive: Tablet ─── */
+@media (max-width: 1279px) {
+  .leftCol {
+    grid-column: 1 / 5;
+  }
+
+  .rightCol {
+    grid-column: 6 / 13;
+  }
+
+  .nameTitle {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+  }
+}
+
+/* ─── Responsive: Mobile ─── */
+@media (max-width: 767px) {
+  .section {
+    padding-top: calc(var(--nav-height) + 32px);
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .leftCol {
+    grid-column: 1 / -1;
+    margin-bottom: 40px;
+  }
+
+  .photoWrapper {
+    max-width: 280px;
+    margin-bottom: 24px;
+  }
+
+  .rightCol {
+    grid-column: 1 / -1;
+  }
+
+  .nameTitle {
+    font-size: clamp(2rem, 10vw, 3.5rem);
+  }
+
+  .statement {
+    font-size: var(--t-body);
+  }
+}
+
+/* ─── Reduced Motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  .marqueeTrack {
+    animation: none;
+  }
+}

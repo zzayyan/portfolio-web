@@ -1,0 +1,153 @@
+/* ═══════════════════════════════════════
+   PROCESS
+   ═══════════════════════════════════════ */
+
+.section {
+  background-color: var(--color-mass);
+  color: var(--color-ground);
+  padding-top: var(--section-padding);
+  padding-bottom: var(--section-padding);
+  padding-left: var(--grid-margin);
+  padding-right: var(--grid-margin);
+}
+
+/* ─── 5.1 Section Header ─── */
+.headerTitle {
+  font-family: var(--font-display-family);
+  font-weight: 900;
+  font-size: var(--t-h1);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--color-ground);
+  margin-bottom: 48px;
+}
+
+/* ─── 5.2 Process Row ─── */
+.processRow {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid var(--color-ground);
+  min-height: 200px;
+}
+
+.processRow:first-of-type {
+  border-top: 1px solid var(--color-ground);
+}
+
+/* ─── Left Cell — Index + Meta ─── */
+.cellLeft {
+  width: 16%;
+  min-width: 140px;
+  border-right: 1px solid var(--color-ground);
+  padding: 40px 32px;
+  font-family: var(--font-mono-family);
+  font-size: var(--t-meta);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-shrink: 0;
+}
+
+.stageIndex {
+  font-size: var(--t-h3);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+
+.stageLabel {
+  display: block;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+/* ─── Center Cell — Stage Name ─── */
+.cellCenter {
+  width: 42%;
+  border-right: 1px solid var(--color-ground);
+  padding: 40px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.stageName {
+  font-family: var(--font-display-family);
+  font-weight: 900;
+  font-size: var(--t-h2);
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  color: var(--color-ground);
+}
+
+/* ─── Right Cell — Description ─── */
+.cellRight {
+  width: 42%;
+  padding: 40px 48px;
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.stageDescription {
+  font-family: var(--font-body-family);
+  font-weight: 400;
+  font-size: var(--t-body);
+  color: var(--color-ground);
+  line-height: 1.6;
+}
+
+/* ─── Responsive: Tablet ─── */
+@media (max-width: 1279px) {
+  .cellLeft {
+    width: 20%;
+    min-width: 120px;
+    padding: 32px 24px;
+  }
+
+  .cellCenter {
+    width: 40%;
+    padding: 32px;
+  }
+
+  .cellRight {
+    width: 40%;
+    padding: 32px;
+  }
+}
+
+/* ─── Responsive: Mobile ─── */
+@media (max-width: 767px) {
+  .processRow {
+    flex-direction: column;
+  }
+
+  .cellLeft {
+    width: 100%;
+    min-width: unset;
+    border-right: none;
+    border-bottom: 1px solid var(--color-ground);
+    padding: 24px;
+    flex-direction: row;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .stageIndex {
+    margin-bottom: 0;
+  }
+
+  .cellCenter {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--color-ground);
+    padding: 24px;
+  }
+
+  .cellRight {
+    width: 100%;
+    padding: 24px;
+  }
+}

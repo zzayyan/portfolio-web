@@ -1,0 +1,47 @@
+/* ═══════════════════════════════════════
+   SECTION INDICATOR — Fixed bottom-left
+   Shows current section: "003 / 007"
+   ═══════════════════════════════════════ */
+
+.indicator {
+  position: fixed;
+  bottom: 32px;
+  left: var(--grid-margin);
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-mono-family);
+  font-size: var(--t-meta);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  pointer-events: none;
+  mix-blend-mode: difference;
+  color: #ffffff;
+}
+
+.current {
+  font-weight: 700;
+  font-size: var(--t-caption);
+}
+
+.divider {
+  opacity: 0.4;
+}
+
+.total {
+  opacity: 0.4;
+}
+
+.label {
+  opacity: 0.4;
+  margin-left: 8px;
+  letter-spacing: 0.08em;
+}
+
+/* Hide on mobile — too small */
+@media (max-width: 767px) {
+  .indicator {
+    display: none;
+  }
+}

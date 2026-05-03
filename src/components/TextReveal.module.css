@@ -1,0 +1,13 @@
+/* ═══════════════════════════════════════
+   TEXT REVEAL — Mask animation container
+   ═══════════════════════════════════════ */
+
+.revealWrapper {
+  overflow: hidden;
+}
+
+.revealLine {
+  display: block;
+  transform: translateY(110%);
+  will-change: transform;
+}
