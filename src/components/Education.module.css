@@ -1,10 +1,10 @@
 /* ═══════════════════════════════════════
-   EDUCATION & CERTIFICATIONS
+   EDUCATION & CERTIFICATIONS — Dark Section
    ═══════════════════════════════════════ */
 
 .section {
-  background-color: var(--color-ground);
-  color: var(--color-mass);
+  background-color: var(--color-mass);
+  color: var(--color-ground);
   padding-top: var(--section-padding);
   padding-bottom: var(--section-padding);
   padding-left: var(--grid-margin);
@@ -18,8 +18,9 @@
   font-size: var(--t-h1);
   letter-spacing: -0.04em;
   line-height: 1;
-  color: var(--color-mass);
+  color: var(--color-ground);
   margin-bottom: 48px;
+  text-align: left;
 }
 
 /* ─── Two-Column Layout ─── */
@@ -43,9 +44,9 @@
   font-size: var(--t-meta);
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--color-mass);
+  color: var(--color-ground);
   padding-bottom: 16px;
-  border-bottom: 1px solid var(--color-mass);
+  border-bottom: 1px solid var(--color-ground);
   margin-bottom: 32px;
 }
 
@@ -53,7 +54,7 @@
 .entry {
   margin-bottom: 32px;
   padding-bottom: 32px;
-  border-bottom: 1px solid var(--color-mass);
+  border-bottom: 1px solid var(--color-ground);
 }
 
 .entry:last-child {
@@ -67,7 +68,7 @@
   font-size: var(--t-meta);
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--color-mass);
+  color: var(--color-ground);
   opacity: 0.7;
   display: block;
   margin-bottom: 8px;
@@ -78,7 +79,7 @@
   font-weight: 700;
   font-size: var(--t-lead);
   letter-spacing: -0.02em;
-  color: var(--color-mass);
+  color: var(--color-ground);
   display: block;
   margin-bottom: 4px;
 }
@@ -87,7 +88,7 @@
   font-family: var(--font-body-family);
   font-weight: 400;
   font-size: var(--t-body);
-  color: var(--color-mass);
+  color: var(--color-ground);
   display: block;
 }
 
@@ -95,7 +96,7 @@
   font-family: var(--font-body-family);
   font-weight: 400;
   font-size: var(--t-body);
-  color: var(--color-mass);
+  color: var(--color-ground);
   opacity: 0.7;
   display: block;
   margin-top: 8px;
@@ -108,7 +109,7 @@
   font-size: var(--t-meta);
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  border: 1px solid var(--color-mass);
+  border: 1px solid var(--color-ground);
   padding: 4px 12px;
   margin-top: 8px;
 }

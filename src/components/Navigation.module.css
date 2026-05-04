@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════
-   NAVIGATION — Fixed Header + Live Clock
+   NAVIGATION — Fixed Centered Header
    ═══════════════════════════════════════ */
 
 .nav {
@@ -13,29 +13,11 @@
   border-bottom: 1px solid var(--color-mass);
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   padding: 0 var(--grid-margin);
 }
 
-/* ─── Logotype ─── */
-.logotype {
-  font-family: var(--font-mono-family);
-  font-size: var(--t-meta);
-  font-weight: 400;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--color-mass);
-  white-space: nowrap;
-}
-
-/* ─── Right Side Container ─── */
-.navRight {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-}
-
-/* ─── Desktop Nav Links ─── */
+/* ─── Nav Links (centered) ─── */
 .navLinks {
   display: flex;
   align-items: center;
@@ -83,20 +65,6 @@
 
 .navLinkActive::after {
   content: "]";
-}
-
-/* ─── Live Clock ─── */
-.clock {
-  font-family: var(--font-mono-family);
-  font-size: var(--t-meta);
-  font-weight: 400;
-  letter-spacing: 0.08em;
-  color: var(--color-mass);
-  opacity: 0.5;
-  white-space: nowrap;
-  border-left: 1px solid var(--color-mass);
-  padding-left: 24px;
-  font-variant-numeric: tabular-nums;
 }
 
 /* ─── Hamburger Button (Mobile) ─── */
@@ -155,12 +123,14 @@
 
 /* ─── Mobile Breakpoint ─── */
 @media (max-width: 767px) {
-  .navRight {
+  .navLinks {
     display: none;
   }
 
   .hamburger {
     display: block;
+    position: absolute;
+    right: var(--grid-margin);
   }
 
   .mobileOverlay {

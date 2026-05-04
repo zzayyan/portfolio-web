@@ -1,0 +1,148 @@
+"use client";
+
+import { useRef } from "react";
+import Link from "next/link";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+import styles from "./AboutPage.module.css";
+import TextReveal from "./TextReveal";
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
+
+export default function AboutPage() {
+  const sectionRef = useRef(null);
+
+  useGSAP(
+    () => {
+      gsap.from("[data-animate]", {
+        opacity: 0,
+        y: 32,
+        duration: 0.6,
+        ease: "expo.out",
+        stagger: 0.1,
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+          toggleActions: "play none none none",
+        },
+      });
+    },
+    { scope: sectionRef }
+  );
+
+  return (
+    <section ref={sectionRef} className={`${styles.section} section-light`}>
+      {/* Header */}
+      <div className={styles.header}>
+        <div className={styles.headerGrid}>
+          <div className={styles.headerLeft}>
+            <Link href="/" className={styles.backLink}>
+              ← Back to Home
+            </Link>
+            <TextReveal
+              as="h1"
+              lines={["About Me"]}
+              className={styles.pageTitle}
+              triggerStart="top 95%"
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className={styles.content}>
+        <div className={styles.contentGrid}>
+          {/* Bio Section */}
+          <div className={styles.bioCol}>
+            <div data-animate className={styles.bioBlock}>
+              <span className={styles.sectionLabel}>BACKGROUND</span>
+              <div className={styles.sectionDivider} />
+              <p className={styles.bodyText}>
+                I build AI-powered systems that retrieve, reason, and synthesize
+                information. My work focuses on information retrieval, large
+                language model engineering, and multi-agent system design.
+              </p>
+              <p className={styles.bodyText}>
+                I approach AI engineering as a precision discipline — every prompt
+                is a specification, every agent boundary is a contract. The goal is
+                always to hide complexity from the user while delivering clear,
+                reliable outputs.
+              </p>
+              <p className={styles.bodyText}>
+                I focus on building AI infrastructure rather than standalone
+                features — systems that are maintainable, evaluable, and designed
+                to scale.
+              </p>
+            </div>
+
+            <div data-animate className={styles.bioBlock}>
+              <span className={styles.sectionLabel}>APPROACH</span>
+              <div className={styles.sectionDivider} />
+              <p className={styles.bodyText}>
+                My engineering philosophy centers on building systems that are
+                transparent, testable, and designed for iteration. I believe the
+                best AI infrastructure makes complexity invisible to the end user
+                while remaining fully observable to the developer.
+              </p>
+            </div>
+          </div>
+
+          {/* Info Column */}
+          <div className={styles.infoCol}>
+            <div data-animate className={styles.infoBlock}>
+              <span className={styles.sectionLabel}>DISCIPLINE</span>
+              <div className={styles.sectionDivider} />
+              <p className={styles.infoValue}>
+                AI Engineering / System Architecture
+              </p>
+            </div>
+
+            <div data-animate className={styles.infoBlock}>
+              <span className={styles.sectionLabel}>AVAILABLE FOR</span>
+              <div className={styles.sectionDivider} />
+              <p className={styles.infoValue}>
+                Consulting · Full-time · Research Collaborations
+              </p>
+            </div>
+
+            <div data-animate className={styles.infoBlock}>
+              <span className={styles.sectionLabel}>INTERESTS</span>
+              <div className={styles.sectionDivider} />
+              <div className={styles.interestPills}>
+                {[
+                  "RAG Systems",
+                  "Multi-Agent",
+                  "LLM Evaluation",
+                  "Prompt Engineering",
+                  "Chain-of-Thought",
+                  "ReAct Agents",
+                  "DSPy",
+                  "LangGraph",
+                ].map((item) => (
+                  <span key={item} className={styles.pill}>
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div data-animate className={styles.ctaBlock}>
+              <a href="/#contact" className={styles.ctaButton}>
+                <span>↗</span> Let&apos;s Connect
+              </a>
+              <a
+                href="/resume.pdf"
+                className={styles.ctaButtonOutline}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span>↓</span> Resume / CV
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

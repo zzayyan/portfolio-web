@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Link from "next/link";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import styles from "./About.module.css";
@@ -8,13 +9,32 @@ import TextReveal from "./TextReveal";
 
 gsap.registerPlugin(useGSAP);
 
+/* ─── Tech Stack Pills ─── */
+const STACK = [
+  "Python",
+  "JavaScript",
+  "TypeScript",
+  "LangChain",
+  "LangGraph",
+  "FastAPI",
+  "Next.js",
+  "React",
+  "Amazon Bedrock",
+  "OpenAI API",
+  "PostgreSQL",
+  "pgvector",
+  "Docker",
+  "Git",
+  "Linux",
+];
+
 const MARQUEE_TEXT =
-  "INTERESTS: Retrieval-Augmented Generation · Multi-Agent Systems · LLM Evaluation · Prompt Engineering · Chain-of-Thought Reasoning · ReAct Agents · DSPy · LangGraph · ";
+  "Retrieval-Augmented Generation · Multi-Agent Systems · LLM Evaluation · Prompt Engineering · Chain-of-Thought Reasoning · ReAct Agents · DSPy · LangGraph · ";
 
 export default function About() {
   const sectionRef = useRef(null);
 
-  /* Entrance animation — no ScrollTrigger needed since this is the landing section */
+  /* Entrance animation */
   useGSAP(
     () => {
       gsap.from("[data-about-animate]", {
@@ -28,6 +48,14 @@ export default function About() {
     { scope: sectionRef }
   );
 
+  const handleScrollTo = (e, targetId) => {
+    e.preventDefault();
+    const target = document.querySelector(targetId);
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <section
       id="about"
@@ -35,76 +63,83 @@ export default function About() {
       className={`${styles.section} section-light`}
     >
       <div className={styles.grid}>
-        {/* Left Column — Photo + Metadata */}
-        <div data-about-animate className={styles.leftCol}>
-          {/* Photo Space */}
-          <div className={styles.photoWrapper}>
-            {/*
-              Replace this placeholder with your photo:
-              <Image src="/your-photo.jpg" alt="[Your Name]" fill className={styles.photoImage} />
-            */}
-            <span className={styles.photoPlaceholder}>[ PHOTO ]</span>
+        {/* Left Column — Text Content */}
+        <div className={styles.leftCol}>
+          <span data-about-animate className={styles.greeting}>
+            Hello, it&apos;s me
+          </span>
+
+          <TextReveal
+            as="h1"
+            lines={["Brillianta Zayyan Muhammad"]}
+            className={styles.nameTitle}
+            triggerStart="top 95%"
+          />
+
+          <div data-about-animate className={styles.roleBlock}>
+            <div className={styles.roleLine} />
+            <span className={styles.roleTitle}>AI ENGINEER</span>
           </div>
 
-          {/* Metadata */}
-          <div className={styles.metaBlock}>
-            <div className={styles.metaEntry}>
-              <span className={styles.metaLabel}>DISCIPLINE</span>
-              <span className={styles.metaValue}>
-                AI Engineering / System Architecture
-              </span>
-            </div>
-            <div className={styles.metaEntry}>
-              <span className={styles.metaLabel}>BASE</span>
-              <span className={styles.metaValue}>[City, Country]</span>
-            </div>
-            <div className={styles.metaEntry}>
-              <span className={styles.metaLabel}>AVAILABLE FOR</span>
-              <span className={styles.metaValue}>
-                Consulting · Full-time · Research Collaborations
-              </span>
+          <div data-about-animate className={styles.statement}>
+            <p>
+              I build AI-powered systems that retrieve, reason, and synthesize
+              information — focusing on RAG pipelines, multi-agent
+              architectures, and LLM infrastructure engineered for reliability
+              and scale.
+            </p>
+          </div>
+
+          {/* CTA Buttons */}
+          <div data-about-animate className={styles.ctaGroup}>
+            <a
+              href="#contact"
+              className={styles.ctaPrimary}
+              onClick={(e) => handleScrollTo(e, "#contact")}
+            >
+              <span className={styles.ctaIcon}>↗</span>
+              Let&apos;s Connect
+            </a>
+            <Link href="/about" className={styles.ctaSecondary}>
+              Know me more
+              <span className={styles.ctaIcon}>→</span>
+            </Link>
+          </div>
+
+          {/* Tech Stack — Compact Pill Grid */}
+          <div data-about-animate className={styles.stackBlock}>
+            <span className={styles.stackLabel}>STACK</span>
+            <div className={styles.stackDivider} />
+            <div className={styles.stackPills}>
+              {STACK.map((tech) => (
+                <span key={tech} className={styles.stackPill}>
+                  {tech}
+                </span>
+              ))}
             </div>
           </div>
         </div>
 
-        {/* Right Column — Name + Bio */}
+        {/* Right Column — Photo */}
         <div data-about-animate className={styles.rightCol}>
-          <TextReveal
-            as="h1"
-            lines={["[FIRST", "LAST", "NAME]"]}
-            className={styles.nameTitle}
-            triggerStart="top 95%"
-          />
-          <span className={styles.roleTitle}>AI ENGINEER</span>
-
-          <div className={styles.dividerLine} />
-
-          <div className={styles.statement}>
-            <p>
-              I build AI-powered systems that retrieve, reason, and synthesize
-              information. My work focuses on information retrieval, large
-              language model engineering, and multi-agent system design.
-            </p>
-            <p>
-              I approach AI engineering as a precision discipline — every prompt
-              is a specification, every agent boundary is a contract. The goal is
-              always to hide complexity from the user while delivering clear,
-              reliable outputs.
-            </p>
-            <p>
-              I focus on building AI infrastructure rather than standalone
-              features — systems that are maintainable, evaluable, and designed
-              to scale.
-            </p>
+          <div className={styles.photoWrapper}>
+            {/*
+              Replace this placeholder with your photo:
+              <Image src="/your-photo.jpg" alt="Brillianta Zayyan Muhammad" fill className={styles.photoImage} />
+            */}
+            <span className={styles.photoPlaceholder}>[ PHOTO ]</span>
           </div>
         </div>
       </div>
 
       {/* Marquee Ticker */}
-      <div className={styles.marqueeWrapper} aria-hidden="true">
-        <div className={styles.marqueeTrack}>
-          <span className={styles.marqueeContent}>{MARQUEE_TEXT}</span>
-          <span className={styles.marqueeContent}>{MARQUEE_TEXT}</span>
+      <div className={styles.marqueeSection}>
+        <span className={styles.marqueeLabel}>INTERESTS</span>
+        <div className={styles.marqueeWrapper} aria-hidden="true">
+          <div className={styles.marqueeTrack}>
+            <span className={styles.marqueeContent}>{MARQUEE_TEXT}</span>
+            <span className={styles.marqueeContent}>{MARQUEE_TEXT}</span>
+          </div>
         </div>
       </div>
     </section>

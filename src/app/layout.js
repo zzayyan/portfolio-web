@@ -1,6 +1,5 @@
 import { IBM_Plex_Mono, Inter } from "next/font/google";
 import SmoothScroll from "@/components/SmoothScroll";
-import NoiseOverlay from "@/components/NoiseOverlay";
 import "./globals.css";
 
 /* ─── Typography Setup ─── */
@@ -24,11 +23,12 @@ const monoFont = IBM_Plex_Mono({
 
 /* ─── Metadata ─── */
 export const metadata = {
-  title: "Portfolio — AI Engineer",
+  metadataBase: new URL("https://brillianta.dev"), // Update with your actual domain
+  title: "Brillianta Zayyan Muhammad — AI Engineer",
   description:
     "Building cognitive systems — RAG architectures, generative AI frameworks, and multi-agent systems.",
   openGraph: {
-    title: "Portfolio — AI Engineer",
+    title: "Brillianta Zayyan Muhammad — AI Engineer",
     description:
       "Building cognitive systems — RAG architectures, generative AI frameworks, and multi-agent systems.",
     type: "website",
@@ -41,7 +41,6 @@ export default function RootLayout({ children }) {
     <html lang="en" className={`${displaySans.variable} ${monoFont.variable}`}>
       <body>
         <SmoothScroll>
-          <NoiseOverlay />
           {children}
         </SmoothScroll>
       </body>

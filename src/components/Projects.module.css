@@ -16,6 +16,7 @@
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
+  flex-direction: row-reverse;
   border-bottom: 1px solid var(--color-mass);
   padding-bottom: 24px;
   margin-bottom: 48px;
@@ -56,13 +57,14 @@
   min-height: 380px;
   text-decoration: none;
   color: var(--color-mass);
-  transition: none;
+  transition: transform 0.3s var(--ease-out-expo), background-color 0.15s ease, color 0.15s ease;
 }
 
 /* Hover inversion */
 .card:hover {
   background-color: var(--color-mass);
   color: var(--color-ground);
+  transform: translateY(-4px);
 }
 
 /* Cursor swap on hover (light → dark bg needs white cursor) */

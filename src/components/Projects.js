@@ -42,9 +42,6 @@ export default function Projects() {
       {/* Section Header */}
       <div className={styles.header}>
         <TextReveal as="h2" lines={["PROJECTS"]} className={styles.headerTitle} />
-        <span className={styles.headerCounter}>
-          [{String(PROJECTS.length).padStart(3, "0")} PROJECTS]
-        </span>
       </div>
 
       {/* 2-Column Grid */}

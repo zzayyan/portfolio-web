@@ -83,8 +83,8 @@ export default function Contact() {
 
       {/* Footer Strip */}
       <footer className={styles.footer}>
-        <span>© {year} — [FULL NAME]</span>
-        <span>ENGINEERED IN PYTHON.</span>
+        <span>© {year} — BRILLIANTA ZAYYAN MUHAMMAD</span>
+        <span>BUILT WITH NEXT.JS</span>
       </footer>
     </section>
   );

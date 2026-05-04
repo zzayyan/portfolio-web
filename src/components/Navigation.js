@@ -6,43 +6,24 @@ import Link from "next/link";
 import styles from "./Navigation.module.css";
 
 const NAV_ITEMS = [
-  { label: "ABOUT_", href: "#about" },
-  { label: "EXPERIENCE_", href: "#experience" },
-  { label: "PROJECTS_", href: "#projects" },
-  { label: "STACK_", href: "#stack" },
-  { label: "CONTACT_", href: "#contact" },
+  { label: "HOME_", href: "/", type: "link" },
+  { label: "ABOUT_", href: "/about", type: "link" },
+  { label: "EXPERIENCE_", href: "#experience", type: "scroll" },
+  { label: "PROJECTS_", href: "#projects", type: "scroll" },
+  { label: "CONTACT_", href: "#contact", type: "scroll" },
 ];
 
 export default function Navigation() {
   const [activeSection, setActiveSection] = useState("");
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [time, setTime] = useState("");
   const pathname = usePathname();
   const isHome = pathname === "/";
-
-  /* ─── Live Clock ─── */
-  useEffect(() => {
-    const updateTime = () => {
-      const now = new Date();
-      setTime(
-        now.toLocaleTimeString("en-GB", {
-          hour: "2-digit",
-          minute: "2-digit",
-          second: "2-digit",
-          hour12: false,
-        })
-      );
-    };
-    updateTime();
-    const interval = setInterval(updateTime, 1000);
-    return () => clearInterval(interval);
-  }, []);
 
   /* ─── IntersectionObserver for active section tracking (homepage only) ─── */
   useEffect(() => {
     if (!isHome) return;
 
-    const sectionIds = ["about", "experience", "projects", "stack", "contact"];
+    const sectionIds = ["about", "experience", "projects", "contact"];
     const observers = [];
 
     sectionIds.forEach((id) => {
@@ -77,67 +58,64 @@ export default function Navigation() {
     };
   }, [mobileOpen]);
 
-  const handleNavClick = (e, href) => {
-    if (!isHome) return;
-    e.preventDefault();
-    setMobileOpen(false);
-    const target = document.querySelector(href);
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth" });
+  const handleNavClick = (e, item) => {
+    if (item.type === "scroll") {
+      if (isHome) {
+        e.preventDefault();
+        setMobileOpen(false);
+        const target = document.querySelector(item.href);
+        if (target) {
+          target.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+      // If not home, let it navigate to /{item.href} naturally
+    } else {
+      // type === "link" — just close mobile menu
+      setMobileOpen(false);
     }
+  };
+
+  const getHref = (item) => {
+    if (item.type === "scroll" && !isHome) {
+      return `/${item.href}`;
+    }
+    return item.href;
+  };
+
+  const isActive = (item) => {
+    if (item.type === "link") {
+      return pathname === item.href;
+    }
+    return isHome && activeSection === item.href.slice(1);
   };
 
   return (
     <nav className={styles.nav} role="navigation" aria-label="Main navigation">
-      {/* Logotype */}
-      <Link href="/" className={styles.logotype}>
-        [LAST_NAME, FIRST] / AI ENGINEER
-      </Link>
-
-      {/* Desktop — Nav Links + Clock */}
-      <div className={styles.navRight}>
-        <ul className={styles.navLinks}>
-          {!isHome && (
-            <li className={styles.navItem}>
-              <Link href="/#projects" className={styles.navLink}>
-                ← BACK
+      {/* Desktop — Centered Nav Links */}
+      <ul className={styles.navLinks}>
+        {NAV_ITEMS.map((item, i) => (
+          <li key={item.label} className={styles.navItem}>
+            {i > 0 && <span className={styles.separator}>·</span>}
+            {item.type === "link" ? (
+              <Link
+                href={item.href}
+                className={isActive(item) ? styles.navLinkActive : styles.navLink}
+                onClick={() => setMobileOpen(false)}
+              >
+                {item.label}
               </Link>
-              <span className={styles.separator}>·</span>
-            </li>
-          )}
-          {NAV_ITEMS.map((item, i) => (
-            <li key={item.href} className={styles.navItem}>
-              {(i > 0 || !isHome) && (
-                <span className={styles.separator}>·</span>
-              )}
-              {isHome ? (
-                <a
-                  href={item.href}
-                  onClick={(e) => handleNavClick(e, item.href)}
-                  className={
-                    activeSection === item.href.slice(1)
-                      ? styles.navLinkActive
-                      : styles.navLink
-                  }
-                >
-                  {item.label}
-                </a>
-              ) : (
-                <Link href={`/${item.href}`} className={styles.navLink}>
-                  {item.label}
-                </Link>
-              )}
-            </li>
-          ))}
-        </ul>
-
-        {/* Live Clock */}
-        {time && (
-          <span className={styles.clock} aria-label="Current time" suppressHydrationWarning>
-            {time}
-          </span>
-        )}
-      </div>
+            ) : (
+              <a
+                href={getHref(item)}
+                className={isActive(item) ? styles.navLinkActive : styles.navLink}
+                onClick={(e) => handleNavClick(e, item)}
+              >
+                {item.label}
+              </a>
+            )}
+          </li>
+        ))}
+      </ul>
 
       {/* Hamburger (Mobile) */}
       <button
@@ -156,34 +134,25 @@ export default function Navigation() {
         className={`${styles.mobileOverlay} ${mobileOpen ? styles.mobileOverlayOpen : ""}`}
         aria-hidden={!mobileOpen}
       >
-        {!isHome && (
-          <Link
-            href="/#projects"
-            className={styles.mobileLink}
-            onClick={() => setMobileOpen(false)}
-          >
-            ← BACK
-          </Link>
-        )}
         {NAV_ITEMS.map((item) =>
-          isHome ? (
-            <a
-              key={item.href}
-              href={item.href}
-              className={styles.mobileLink}
-              onClick={(e) => handleNavClick(e, item.href)}
-            >
-              {item.label}
-            </a>
-          ) : (
+          item.type === "link" ? (
             <Link
-              key={item.href}
-              href={`/${item.href}`}
+              key={item.label}
+              href={item.href}
               className={styles.mobileLink}
               onClick={() => setMobileOpen(false)}
             >
               {item.label}
             </Link>
+          ) : (
+            <a
+              key={item.label}
+              href={getHref(item)}
+              className={styles.mobileLink}
+              onClick={(e) => handleNavClick(e, item)}
+            >
+              {item.label}
+            </a>
           )
         )}
       </div>

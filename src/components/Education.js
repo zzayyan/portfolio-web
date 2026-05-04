@@ -70,7 +70,7 @@ export default function Education() {
     <section
       id="education"
       ref={sectionRef}
-      className={`${styles.section} section-light`}
+      className={`${styles.section} section-dark`}
     >
       <h2 className={styles.headerTitle}>EDUCATION & CERTIFICATIONS</h2>
 

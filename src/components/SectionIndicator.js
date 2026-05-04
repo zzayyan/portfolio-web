@@ -7,14 +7,20 @@ const SECTIONS = [
   { id: "about", label: "ABOUT" },
   { id: "experience", label: "EXPERIENCE" },
   { id: "projects", label: "PROJECTS" },
-  { id: "stack", label: "TECH STACK" },
   { id: "education", label: "EDUCATION" },
-  { id: "process", label: "PROCESS" },
   { id: "contact", label: "CONTACT" },
 ];
 
 export default function SectionIndicator() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [hasScrolled, setHasScrolled] = useState(false);
+
+  /* Show indicator only after user scrolls */
+  useEffect(() => {
+    const onScroll = () => setHasScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   useEffect(() => {
     const observers = [];
@@ -43,7 +49,7 @@ export default function SectionIndicator() {
   const total = String(SECTIONS.length).padStart(3, "0");
 
   return (
-    <div className={styles.indicator} aria-hidden="true">
+    <div className={`${styles.indicator} ${hasScrolled ? styles.visible : ""}`} aria-hidden="true">
       <span className={styles.current}>{current}</span>
       <span className={styles.divider}>/</span>
       <span className={styles.total}>{total}</span>

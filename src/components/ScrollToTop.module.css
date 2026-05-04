@@ -1,0 +1,47 @@
+/* ═══════════════════════════════════════
+   SCROLL TO TOP — Fixed bottom-right button
+   ═══════════════════════════════════════ */
+
+.button {
+  position: fixed;
+  bottom: 32px;
+  right: var(--grid-margin);
+  z-index: 900;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-mass);
+  background-color: var(--color-ground);
+  color: var(--color-mass);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.15s ease, color 0.15s ease;
+  pointer-events: none;
+  mix-blend-mode: difference;
+  border-color: #ffffff;
+  color: #ffffff;
+  background-color: transparent;
+}
+
+.button.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: all;
+}
+
+.button:hover {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+/* Hide on mobile — too small */
+@media (max-width: 767px) {
+  .button {
+    width: 40px;
+    height: 40px;
+    bottom: 24px;
+  }
+}
