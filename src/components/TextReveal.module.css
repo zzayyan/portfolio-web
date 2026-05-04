@@ -4,10 +4,10 @@
 
 .revealWrapper {
   overflow: hidden;
+  display: block;
 }
 
 .revealLine {
   display: block;
-  transform: translateY(110%);
   will-change: transform;
 }

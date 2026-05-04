@@ -2,36 +2,14 @@
 
 import { useRef } from "react";
 import Link from "next/link";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
+import { motion, useInView } from "framer-motion";
 import { PROJECTS } from "@/data/projects";
 import styles from "./Projects.module.css";
 import TextReveal from "./TextReveal";
 
-gsap.registerPlugin(useGSAP, ScrollTrigger);
-
 export default function Projects() {
   const sectionRef = useRef(null);
-
-  useGSAP(
-    () => {
-      gsap.utils.toArray("[data-project]").forEach((el) => {
-        gsap.from(el, {
-          opacity: 0,
-          y: 32,
-          duration: 0.5,
-          ease: "expo.out",
-          scrollTrigger: {
-            trigger: el,
-            start: "top 85%",
-            toggleActions: "play none none none",
-          },
-        });
-      });
-    },
-    { scope: sectionRef }
-  );
+  const isInView = useInView(sectionRef, { once: true, margin: "-10% 0px" });
 
   return (
     <section
@@ -46,38 +24,47 @@ export default function Projects() {
 
       {/* 2-Column Grid */}
       <div className={styles.grid}>
-        {PROJECTS.map((project) => (
-          <Link
+        {PROJECTS.map((project, i) => (
+          <motion.div
             key={project.index}
-            href={`/projects/${project.slug}`}
-            data-project
-            className={styles.card}
-            aria-label={`View details for ${project.name}`}
+            initial={{ opacity: 0, y: 32 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{
+              duration: 0.5,
+              ease: [0.16, 1, 0.3, 1],
+              delay: i * 0.1,
+            }}
           >
-            {/* Card Header — Index + Year */}
-            <div className={styles.cardHeader}>
-              <span className={styles.cardIndex}>[{project.index}]</span>
-              <span className={styles.cardYear}>{project.year}</span>
-            </div>
-
-            {/* Card Body */}
-            <div className={styles.cardBody}>
-              <h3 className={styles.cardTitle}>{project.name}</h3>
-              <p className={styles.cardDescription}>{project.shortDescription}</p>
-            </div>
-
-            {/* Card Footer — Stack + CTA */}
-            <div className={styles.cardFooter}>
-              <div className={styles.cardTags}>
-                {project.stack.split(" / ").slice(0, 4).map((tag) => (
-                  <span key={tag} className={styles.cardTag}>{tag}</span>
-                ))}
+            <Link
+              href={`/projects/${project.slug}`}
+              className={styles.card}
+              aria-label={`View details for ${project.name}`}
+            >
+              {/* Card Header — Index + Year */}
+              <div className={styles.cardHeader}>
+                <span className={styles.cardIndex}>[{project.index}]</span>
+                <span className={styles.cardYear}>{project.year}</span>
               </div>
-              <span className={styles.cardCta}>
-                VIEW PROJECT
-              </span>
-            </div>
-          </Link>
+
+              {/* Card Body */}
+              <div className={styles.cardBody}>
+                <h3 className={styles.cardTitle}>{project.name}</h3>
+                <p className={styles.cardDescription}>{project.shortDescription}</p>
+              </div>
+
+              {/* Card Footer — Stack + CTA */}
+              <div className={styles.cardFooter}>
+                <div className={styles.cardTags}>
+                  {project.stack.split(" / ").slice(0, 4).map((tag) => (
+                    <span key={tag} className={styles.cardTag}>{tag}</span>
+                  ))}
+                </div>
+                <span className={styles.cardCta}>
+                  VIEW PROJECT
+                </span>
+              </div>
+            </Link>
+          </motion.div>
         ))}
       </div>
     </section>

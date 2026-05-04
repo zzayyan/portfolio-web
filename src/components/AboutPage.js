@@ -2,34 +2,13 @@
 
 import { useRef } from "react";
 import Link from "next/link";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
+import { motion, useInView } from "framer-motion";
 import styles from "./AboutPage.module.css";
 import TextReveal from "./TextReveal";
 
-gsap.registerPlugin(useGSAP, ScrollTrigger);
-
 export default function AboutPage() {
   const sectionRef = useRef(null);
-
-  useGSAP(
-    () => {
-      gsap.from("[data-animate]", {
-        opacity: 0,
-        y: 32,
-        duration: 0.6,
-        ease: "expo.out",
-        stagger: 0.1,
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-          toggleActions: "play none none none",
-        },
-      });
-    },
-    { scope: sectionRef }
-  );
+  const isInView = useInView(sectionRef, { once: true, margin: "-10% 0px" });
 
   return (
     <section ref={sectionRef} className={`${styles.section} section-light`}>
@@ -44,7 +23,6 @@ export default function AboutPage() {
               as="h1"
               lines={["About Me"]}
               className={styles.pageTitle}
-              triggerStart="top 95%"
             />
           </div>
         </div>
@@ -55,7 +33,12 @@ export default function AboutPage() {
         <div className={styles.contentGrid}>
           {/* Bio Section */}
           <div className={styles.bioCol}>
-            <div data-animate className={styles.bioBlock}>
+            <motion.div
+              className={styles.bioBlock}
+              initial={{ opacity: 0, y: 32 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            >
               <span className={styles.sectionLabel}>BACKGROUND</span>
               <div className={styles.sectionDivider} />
               <p className={styles.bodyText}>
@@ -74,9 +57,18 @@ export default function AboutPage() {
                 features — systems that are maintainable, evaluable, and designed
                 to scale.
               </p>
-            </div>
+            </motion.div>
 
-            <div data-animate className={styles.bioBlock}>
+            <motion.div
+              className={styles.bioBlock}
+              initial={{ opacity: 0, y: 32 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{
+                duration: 0.6,
+                ease: [0.16, 1, 0.3, 1],
+                delay: 0.1,
+              }}
+            >
               <span className={styles.sectionLabel}>APPROACH</span>
               <div className={styles.sectionDivider} />
               <p className={styles.bodyText}>
@@ -85,28 +77,55 @@ export default function AboutPage() {
                 best AI infrastructure makes complexity invisible to the end user
                 while remaining fully observable to the developer.
               </p>
-            </div>
+            </motion.div>
           </div>
 
           {/* Info Column */}
           <div className={styles.infoCol}>
-            <div data-animate className={styles.infoBlock}>
+            <motion.div
+              className={styles.infoBlock}
+              initial={{ opacity: 0, y: 32 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{
+                duration: 0.6,
+                ease: [0.16, 1, 0.3, 1],
+                delay: 0.05,
+              }}
+            >
               <span className={styles.sectionLabel}>DISCIPLINE</span>
               <div className={styles.sectionDivider} />
               <p className={styles.infoValue}>
                 AI Engineering / System Architecture
               </p>
-            </div>
+            </motion.div>
 
-            <div data-animate className={styles.infoBlock}>
+            <motion.div
+              className={styles.infoBlock}
+              initial={{ opacity: 0, y: 32 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{
+                duration: 0.6,
+                ease: [0.16, 1, 0.3, 1],
+                delay: 0.1,
+              }}
+            >
               <span className={styles.sectionLabel}>AVAILABLE FOR</span>
               <div className={styles.sectionDivider} />
               <p className={styles.infoValue}>
                 Consulting · Full-time · Research Collaborations
               </p>
-            </div>
+            </motion.div>
 
-            <div data-animate className={styles.infoBlock}>
+            <motion.div
+              className={styles.infoBlock}
+              initial={{ opacity: 0, y: 32 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{
+                duration: 0.6,
+                ease: [0.16, 1, 0.3, 1],
+                delay: 0.15,
+              }}
+            >
               <span className={styles.sectionLabel}>INTERESTS</span>
               <div className={styles.sectionDivider} />
               <div className={styles.interestPills}>
@@ -125,9 +144,18 @@ export default function AboutPage() {
                   </span>
                 ))}
               </div>
-            </div>
+            </motion.div>
 
-            <div data-animate className={styles.ctaBlock}>
+            <motion.div
+              className={styles.ctaBlock}
+              initial={{ opacity: 0, y: 32 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{
+                duration: 0.6,
+                ease: [0.16, 1, 0.3, 1],
+                delay: 0.2,
+              }}
+            >
               <a href="/#contact" className={styles.ctaButton}>
                 <span>↗</span> Let&apos;s Connect
               </a>
@@ -139,7 +167,7 @@ export default function AboutPage() {
               >
                 <span>↓</span> Resume / CV
               </a>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>

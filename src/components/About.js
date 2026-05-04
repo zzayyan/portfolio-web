@@ -1,13 +1,9 @@
 "use client";
 
-import { useRef } from "react";
 import Link from "next/link";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
+import { motion } from "framer-motion";
 import styles from "./About.module.css";
 import TextReveal from "./TextReveal";
-
-gsap.registerPlugin(useGSAP);
 
 /* ─── Tech Stack Pills ─── */
 const STACK = [
@@ -31,23 +27,13 @@ const STACK = [
 const MARQUEE_TEXT =
   "Retrieval-Augmented Generation · Multi-Agent Systems · LLM Evaluation · Prompt Engineering · Chain-of-Thought Reasoning · ReAct Agents · DSPy · LangGraph · ";
 
+const fadeUp = {
+  initial: { opacity: 0, y: 24 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] },
+};
+
 export default function About() {
-  const sectionRef = useRef(null);
-
-  /* Entrance animation */
-  useGSAP(
-    () => {
-      gsap.from("[data-about-animate]", {
-        opacity: 0,
-        y: 24,
-        duration: 0.4,
-        ease: "expo.out",
-        stagger: 0.08,
-      });
-    },
-    { scope: sectionRef }
-  );
-
   const handleScrollTo = (e, targetId) => {
     e.preventDefault();
     const target = document.querySelector(targetId);
@@ -57,41 +43,48 @@ export default function About() {
   };
 
   return (
-    <section
-      id="about"
-      ref={sectionRef}
-      className={`${styles.section} section-light`}
-    >
+    <section id="about" className={`${styles.section} section-light`}>
       <div className={styles.grid}>
         {/* Left Column — Text Content */}
         <div className={styles.leftCol}>
-          <span data-about-animate className={styles.greeting}>
+          <motion.span {...fadeUp} className={styles.greeting}>
             Hello, it&apos;s me
-          </span>
+          </motion.span>
 
           <TextReveal
             as="h1"
             lines={["Brillianta Zayyan Muhammad"]}
             className={styles.nameTitle}
-            triggerStart="top 95%"
           />
 
-          <div data-about-animate className={styles.roleBlock}>
+          <motion.div
+            {...fadeUp}
+            transition={{ ...fadeUp.transition, delay: 0.15 }}
+            className={styles.roleBlock}
+          >
             <div className={styles.roleLine} />
             <span className={styles.roleTitle}>AI ENGINEER</span>
-          </div>
+          </motion.div>
 
-          <div data-about-animate className={styles.statement}>
+          <motion.div
+            {...fadeUp}
+            transition={{ ...fadeUp.transition, delay: 0.2 }}
+            className={styles.statement}
+          >
             <p>
               I build AI-powered systems that retrieve, reason, and synthesize
               information — focusing on RAG pipelines, multi-agent
               architectures, and LLM infrastructure engineered for reliability
               and scale.
             </p>
-          </div>
+          </motion.div>
 
           {/* CTA Buttons */}
-          <div data-about-animate className={styles.ctaGroup}>
+          <motion.div
+            {...fadeUp}
+            transition={{ ...fadeUp.transition, delay: 0.25 }}
+            className={styles.ctaGroup}
+          >
             <a
               href="#contact"
               className={styles.ctaPrimary}
@@ -104,10 +97,14 @@ export default function About() {
               Know me more
               <span className={styles.ctaIcon}>→</span>
             </Link>
-          </div>
+          </motion.div>
 
           {/* Tech Stack — Compact Pill Grid */}
-          <div data-about-animate className={styles.stackBlock}>
+          <motion.div
+            {...fadeUp}
+            transition={{ ...fadeUp.transition, delay: 0.3 }}
+            className={styles.stackBlock}
+          >
             <span className={styles.stackLabel}>STACK</span>
             <div className={styles.stackDivider} />
             <div className={styles.stackPills}>
@@ -117,19 +114,19 @@ export default function About() {
                 </span>
               ))}
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* Right Column — Photo */}
-        <div data-about-animate className={styles.rightCol}>
+        <motion.div
+          {...fadeUp}
+          transition={{ ...fadeUp.transition, delay: 0.1 }}
+          className={styles.rightCol}
+        >
           <div className={styles.photoWrapper}>
-            {/*
-              Replace this placeholder with your photo:
-              <Image src="/your-photo.jpg" alt="Brillianta Zayyan Muhammad" fill className={styles.photoImage} />
-            */}
             <span className={styles.photoPlaceholder}>[ PHOTO ]</span>
           </div>
-        </div>
+        </motion.div>
       </div>
 
       {/* Marquee Ticker */}

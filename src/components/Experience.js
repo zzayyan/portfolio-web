@@ -1,13 +1,9 @@
 "use client";
 
 import { useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
+import { motion, useInView } from "framer-motion";
 import styles from "./Experience.module.css";
 import TextReveal from "./TextReveal";
-
-gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 /* ─── Work Experience Data (placeholder — replace with real data) ─── */
 const EXPERIENCES = [
@@ -53,25 +49,7 @@ const EXPERIENCES = [
 
 export default function Experience() {
   const sectionRef = useRef(null);
-
-  useGSAP(
-    () => {
-      gsap.utils.toArray("[data-exp-entry]").forEach((el) => {
-        gsap.from(el, {
-          opacity: 0,
-          y: 24,
-          duration: 0.5,
-          ease: "expo.out",
-          scrollTrigger: {
-            trigger: el,
-            start: "top 85%",
-            toggleActions: "play none none none",
-          },
-        });
-      });
-    },
-    { scope: sectionRef }
-  );
+  const isInView = useInView(sectionRef, { once: true, margin: "-10% 0px" });
 
   return (
     <section
@@ -82,7 +60,17 @@ export default function Experience() {
       <TextReveal as="h2" lines={["EXPERIENCE"]} className={styles.headerTitle} />
 
       {EXPERIENCES.map((exp, i) => (
-        <article key={i} data-exp-entry className={styles.entry}>
+        <motion.article
+          key={i}
+          className={styles.entry}
+          initial={{ opacity: 0, y: 24 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{
+            duration: 0.5,
+            ease: [0.16, 1, 0.3, 1],
+            delay: i * 0.12,
+          }}
+        >
           {/* Left — Period + Company */}
           <div className={styles.entryMeta}>
             <span className={styles.period}>{exp.period}</span>
@@ -106,7 +94,7 @@ export default function Experience() {
               ))}
             </div>
           </div>
-        </article>
+        </motion.article>
       ))}
     </section>
   );

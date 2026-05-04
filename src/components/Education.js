@@ -1,12 +1,8 @@
 "use client";
 
 import { useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
+import { motion, useInView } from "framer-motion";
 import styles from "./Education.module.css";
-
-gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 /* ─── Education Data (placeholder — replace with real data) ─── */
 const EDUCATION = [
@@ -48,23 +44,7 @@ const CERTIFICATIONS = [
 
 export default function Education() {
   const sectionRef = useRef(null);
-
-  useGSAP(
-    () => {
-      gsap.from(sectionRef.current, {
-        opacity: 0,
-        y: 32,
-        duration: 0.5,
-        ease: "expo.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 85%",
-          toggleActions: "play none none none",
-        },
-      });
-    },
-    { scope: sectionRef }
-  );
+  const isInView = useInView(sectionRef, { once: true, margin: "-15% 0px" });
 
   return (
     <section
@@ -72,9 +52,25 @@ export default function Education() {
       ref={sectionRef}
       className={`${styles.section} section-dark`}
     >
-      <h2 className={styles.headerTitle}>EDUCATION & CERTIFICATIONS</h2>
+      <motion.h2
+        className={styles.headerTitle}
+        initial={{ opacity: 0, y: 32 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+      >
+        EDUCATION & CERTIFICATIONS
+      </motion.h2>
 
-      <div className={styles.grid}>
+      <motion.div
+        className={styles.grid}
+        initial={{ opacity: 0, y: 32 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{
+          duration: 0.5,
+          ease: [0.16, 1, 0.3, 1],
+          delay: 0.1,
+        }}
+      >
         {/* Education Column */}
         <div className={styles.eduCol}>
           <h3 className={styles.subHeader}>EDUCATION</h3>
@@ -102,7 +98,7 @@ export default function Education() {
             </div>
           ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

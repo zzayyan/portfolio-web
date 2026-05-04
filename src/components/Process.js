@@ -1,13 +1,9 @@
 "use client";
 
 import { useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
+import { motion, useInView } from "framer-motion";
 import styles from "./Process.module.css";
 import TextReveal from "./TextReveal";
-
-gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 /* ─── Process Stages Data ─── */
 const STAGES = [
@@ -43,25 +39,7 @@ const STAGES = [
 
 export default function Process() {
   const sectionRef = useRef(null);
-
-  useGSAP(
-    () => {
-      gsap.utils.toArray("[data-process-row]").forEach((el) => {
-        gsap.from(el, {
-          opacity: 0,
-          y: 24,
-          duration: 0.5,
-          ease: "expo.out",
-          scrollTrigger: {
-            trigger: el,
-            start: "top 85%",
-            toggleActions: "play none none none",
-          },
-        });
-      });
-    },
-    { scope: sectionRef }
-  );
+  const isInView = useInView(sectionRef, { once: true, margin: "-10% 0px" });
 
   return (
     <section
@@ -73,8 +51,18 @@ export default function Process() {
       <TextReveal as="h2" lines={["PROCESS"]} className={styles.headerTitle} />
 
       {/* Process Rows */}
-      {STAGES.map((stage) => (
-        <div key={stage.index} data-process-row className={styles.processRow}>
+      {STAGES.map((stage, i) => (
+        <motion.div
+          key={stage.index}
+          className={styles.processRow}
+          initial={{ opacity: 0, y: 24 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{
+            duration: 0.5,
+            ease: [0.16, 1, 0.3, 1],
+            delay: i * 0.1,
+          }}
+        >
           {/* Left Cell — Index + Label */}
           <div className={styles.cellLeft}>
             <span className={styles.stageIndex}>[{stage.index}]</span>
@@ -90,7 +78,7 @@ export default function Process() {
           <div className={styles.cellRight}>
             <p className={styles.stageDescription}>{stage.description}</p>
           </div>
-        </div>
+        </motion.div>
       ))}
     </section>
   );

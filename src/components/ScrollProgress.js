@@ -1,33 +1,21 @@
 "use client";
 
-import { useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
+import { useEffect, useState } from "react";
+import { motion, useScroll, useSpring } from "framer-motion";
 import styles from "./ScrollProgress.module.css";
 
-gsap.registerPlugin(useGSAP, ScrollTrigger);
-
 export default function ScrollProgress() {
-  const barRef = useRef(null);
-
-  useGSAP(() => {
-    gsap.to(barRef.current, {
-      height: "100%",
-      ease: "none",
-      scrollTrigger: {
-        trigger: document.documentElement,
-        start: "top top",
-        end: "bottom bottom",
-        scrub: 0.3,
-      },
-    });
+  const { scrollYProgress } = useScroll();
+  const scaleY = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
   });
 
   return (
-    <div
-      ref={barRef}
+    <motion.div
       className={styles.bar}
+      style={{ scaleY, transformOrigin: "top" }}
       role="progressbar"
       aria-label="Scroll progress"
       aria-valuemin={0}

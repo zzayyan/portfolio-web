@@ -1,12 +1,8 @@
 "use client";
 
 import { useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
+import { motion, useInView } from "framer-motion";
 import styles from "./Contact.module.css";
-
-gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const CONTACT_LINKS = [
   { label: "EMAIL_", href: "mailto:your@email.com" },
@@ -17,24 +13,7 @@ const CONTACT_LINKS = [
 
 export default function Contact() {
   const sectionRef = useRef(null);
-
-  useGSAP(
-    () => {
-      gsap.from("[data-contact-animate]", {
-        opacity: 0,
-        y: 32,
-        duration: 0.5,
-        ease: "expo.out",
-        stagger: 0.08,
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 60%",
-          toggleActions: "play none none none",
-        },
-      });
-    },
-    { scope: sectionRef }
-  );
+  const isInView = useInView(sectionRef, { once: true, margin: "-20% 0px" });
 
   const year = new Date().getFullYear();
 
@@ -46,20 +25,36 @@ export default function Contact() {
     >
       <div className={styles.ctaBlock}>
         {/* CTA Headline */}
-        <h2 data-contact-animate className={styles.ctaHeadline}>
+        <motion.h2
+          className={styles.ctaHeadline}
+          initial={{ opacity: 0, y: 32 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        >
           GET IN
           <br />
           TOUCH.
-        </h2>
+        </motion.h2>
 
         {/* Divider */}
-        <div data-contact-animate className={styles.ctaDivider} />
+        <motion.div
+          className={styles.ctaDivider}
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.5, delay: 0.1 }}
+        />
 
         {/* Contact Links */}
-        <nav
-          data-contact-animate
+        <motion.nav
           className={styles.contactLinks}
           aria-label="Contact links"
+          initial={{ opacity: 0, y: 16 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{
+            duration: 0.5,
+            ease: [0.16, 1, 0.3, 1],
+            delay: 0.15,
+          }}
         >
           {CONTACT_LINKS.map((link, i) => (
             <span key={link.label}>
@@ -78,7 +73,7 @@ export default function Contact() {
               </a>
             </span>
           ))}
-        </nav>
+        </motion.nav>
       </div>
 
       {/* Footer Strip */}

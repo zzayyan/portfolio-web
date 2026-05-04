@@ -1,10 +1,6 @@
 /* ═══════════════════════════════════════
-   PAGE TRANSITION — Fade-in + Overlay Wipe
+   PAGE TRANSITION — Overlay Wipe
    ═══════════════════════════════════════ */
-
-.wrapper {
-  opacity: 0;
-}
 
 .overlay {
   position: fixed;
@@ -21,9 +17,5 @@
 @media (prefers-reduced-motion: reduce) {
   .overlay {
     display: none;
-  }
-
-  .wrapper {
-    opacity: 1;
   }
 }

@@ -1,12 +1,8 @@
 "use client";
 
 import { useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
+import { motion, useInView } from "framer-motion";
 import styles from "./TechStack.module.css";
-
-gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 /* ─── Proficiency bar renderer ─── */
 function ProficiencyBar({ level }) {
@@ -63,23 +59,7 @@ const STACK_DATA = [
 
 export default function TechStack() {
   const sectionRef = useRef(null);
-
-  useGSAP(
-    () => {
-      gsap.from(sectionRef.current, {
-        opacity: 0,
-        y: 32,
-        duration: 0.5,
-        ease: "expo.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 85%",
-          toggleActions: "play none none none",
-        },
-      });
-    },
-    { scope: sectionRef }
-  );
+  const isInView = useInView(sectionRef, { once: true, margin: "-15% 0px" });
 
   const today = new Date().toISOString().split("T")[0];
 
@@ -95,7 +75,12 @@ export default function TechStack() {
       </div>
 
       {/* 4.2 — Registry Table */}
-      <table className={styles.table}>
+      <motion.table
+        className={styles.table}
+        initial={{ opacity: 0, y: 32 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+      >
         <thead>
           <tr>
             <th>CATEGORY</th>
@@ -126,7 +111,7 @@ export default function TechStack() {
             ))
           )}
         </tbody>
-      </table>
+      </motion.table>
 
       {/* 4.3 — Footer Note */}
       <p className={styles.footerNote}>
