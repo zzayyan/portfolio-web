@@ -8,24 +8,24 @@ import TextReveal from "./TextReveal";
 /* ─── Tech Stack Pills ─── */
 const STACK = [
   "Python",
-  "JavaScript",
-  "TypeScript",
-  "LangChain",
+  "SQL",
   "LangGraph",
+  "LangChain",
+  "LangFlow",
   "FastAPI",
-  "Next.js",
-  "React",
+  "FastMCP",
   "Amazon Bedrock",
-  "OpenAI API",
-  "PostgreSQL",
-  "pgvector",
+  "Google Gemini",
+  "DeepSeek",
+  "ChromaDB",
+  "Redis",
+  "TensorFlow",
+  "YOLO",
   "Docker",
-  "Git",
-  "Linux",
 ];
 
 const MARQUEE_TEXT =
-  "Retrieval-Augmented Generation · Multi-Agent Systems · LLM Evaluation · Prompt Engineering · Chain-of-Thought Reasoning · ReAct Agents · DSPy · LangGraph · ";
+  "Retrieval-Augmented Generation · Multi-Agent Systems · LLM Evaluation · Prompt Engineering · Computer Vision · ReAct Agents · Embeddings · LangGraph · ";
 
 const fadeUp = {
   initial: { opacity: 0, y: 24 },

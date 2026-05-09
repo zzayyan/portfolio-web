@@ -24,35 +24,46 @@ function ProficiencyBar({ level }) {
 /* ─── Stack Data ─── */
 const STACK_DATA = [
   {
-    category: "ORCHESTRATION",
+    category: "AI & ORCHESTRATION",
     items: [
       { tool: "LangGraph", role: "Multi-agent state machine", level: "EXPERT" },
       { tool: "LangChain", role: "Chain composition, tooling", level: "EXPERT" },
+      { tool: "LangFlow", role: "Visual flow builder", level: "ADVANCED" },
     ],
   },
   {
     category: "LLM PROVIDERS",
     items: [
-      { tool: "Amazon Bedrock", role: "Nova Pro / Nova Lite models", level: "EXPERT" },
+      { tool: "Amazon Bedrock", role: "Nova Pro / Nova Lite / Titan", level: "EXPERT" },
       { tool: "DeepSeek", role: "Reasoning, code generation", level: "ADVANCED" },
-      { tool: "OpenAI API", role: "GPT-4o integration", level: "ADVANCED" },
+      { tool: "Google Gemini", role: "Multi-modal AI", level: "ADVANCED" },
     ],
   },
   {
-    category: "RETRIEVAL",
+    category: "RETRIEVAL & DATA",
     items: [
-      { tool: "pgvector", role: "Vector similarity search", level: "EXPERT" },
+      { tool: "ChromaDB", role: "Vector store for RAG", level: "EXPERT" },
+      { tool: "Redis", role: "Session & async task management", level: "ADVANCED" },
       { tool: "Tavily", role: "Real-time web search API", level: "ADVANCED" },
-      { tool: "FAISS", role: "Embedding index prototype", level: "PROFICIENT" },
+      { tool: "SQL (MySQL, PostgreSQL)", role: "Relational databases", level: "ADVANCED" },
     ],
   },
   {
     category: "INFRASTRUCTURE",
     items: [
-      { tool: "Python 3.11+", role: "Primary language", level: "EXPERT" },
-      { tool: "FastAPI", role: "API layer, async endpoints", level: "ADVANCED" },
-      { tool: "PostgreSQL", role: "Persistent storage, RAG data", level: "ADVANCED" },
-      { tool: "Docker", role: "Containerization", level: "PROFICIENT" },
+      { tool: "Python", role: "Primary language", level: "EXPERT" },
+      { tool: "FastAPI", role: "API layer, async endpoints", level: "EXPERT" },
+      { tool: "FastMCP", role: "MCP server development", level: "ADVANCED" },
+      { tool: "Docker", role: "Containerization", level: "ADVANCED" },
+    ],
+  },
+  {
+    category: "ML & CV",
+    items: [
+      { tool: "TensorFlow", role: "Deep learning, transfer learning", level: "ADVANCED" },
+      { tool: "YOLO", role: "Object detection & segmentation", level: "ADVANCED" },
+      { tool: "Roboflow", role: "Data annotation & augmentation", level: "ADVANCED" },
+      { tool: "Faster-Whisper", role: "Audio transcription", level: "PROFICIENT" },
     ],
   },
 ];

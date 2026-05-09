@@ -37,7 +37,7 @@ export default function Hero() {
         <span className={styles.annotationValue}>RAG / AGENTS</span>
         <span className={styles.annotationValue}>MULTI-SYSTEM</span>
         <span className={styles.annotationLabel}>LOCATION</span>
-        <span className={styles.annotationValue}>[CITY, COUNTRY]</span>
+        <span className={styles.annotationValue}>MALANG, INDONESIA</span>
         <span className={styles.annotationLabel}>LAST UPDATED</span>
         <span className={styles.annotationValue}>{today}</span>
       </motion.aside>

@@ -42,20 +42,23 @@ export default function AboutPage() {
               <span className={styles.sectionLabel}>BACKGROUND</span>
               <div className={styles.sectionDivider} />
               <p className={styles.bodyText}>
-                I build AI-powered systems that retrieve, reason, and synthesize
-                information. My work focuses on information retrieval, large
-                language model engineering, and multi-agent system design.
+                An Informatics Engineering graduate specializing in Artificial
+                Intelligence implementation, focusing on Generative AI, Large
+                Language Models (LLMs), Multi-Agent architectures, and Computer
+                Vision.
               </p>
               <p className={styles.bodyText}>
-                I approach AI engineering as a precision discipline — every prompt
-                is a specification, every agent boundary is a contract. The goal is
-                always to hide complexity from the user while delivering clear,
-                reliable outputs.
+                Experienced in architecting end-to-end AI systems, including
+                RAG-based chatbots, autonomous research agents, and automated
+                video processing pipelines, supported by practical skills in AI
+                backend development using FastAPI and Docker.
               </p>
               <p className={styles.bodyText}>
-                I focus on building AI infrastructure rather than standalone
-                features — systems that are maintainable, evaluable, and designed
-                to scale.
+                Complementing technical expertise with a background in IT support
+                and hardware/software troubleshooting to ensure seamless technical
+                operations. Committed to continuous innovation, actively leveraging
+                advanced prompt engineering and AI-driven automation to optimize
+                development workflows.
               </p>
             </motion.div>
 
@@ -130,13 +133,13 @@ export default function AboutPage() {
               <div className={styles.sectionDivider} />
               <div className={styles.interestPills}>
                 {[
+                  "Generative AI",
                   "RAG Systems",
                   "Multi-Agent",
-                  "LLM Evaluation",
+                  "Computer Vision",
                   "Prompt Engineering",
-                  "Chain-of-Thought",
+                  "LLM Evaluation",
                   "ReAct Agents",
-                  "DSPy",
                   "LangGraph",
                 ].map((item) => (
                   <span key={item} className={styles.pill}>

@@ -4,41 +4,47 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import styles from "./Education.module.css";
 
-/* ─── Education Data (placeholder — replace with real data) ─── */
+/* ─── Education Data ─── */
 const EDUCATION = [
   {
-    period: "2020 — 2024",
-    title: "[Degree Title]",
-    institution: "[University Name]",
-    detail: "[Faculty / Department]",
-  },
-  {
-    period: "2017 — 2020",
-    title: "[Previous Degree]",
-    institution: "[Institution Name]",
-    detail: "[Relevant field of study]",
+    period: "2021 — 2025",
+    title: "Bachelor of Engineering (S.T.)",
+    institution: "State University of Malang (Universitas Negeri Malang)",
+    detail: "Informatics Engineering / Computer Science — GPA: 3.93 / 4.0",
   },
 ];
 
-/* ─── Certifications Data (placeholder — replace with real data) ─── */
+/* ─── Certifications Data ─── */
 const CERTIFICATIONS = [
   {
     period: "2024",
-    title: "[Certification Name]",
-    issuer: "[Issuing Organization]",
-    credentialId: "[CREDENTIAL-ID]",
+    title: "Bangkit Academy 2024",
+    issuer: "Google, Tokopedia, Gojek, Traveloka",
   },
   {
     period: "2024",
-    title: "[Certification Name]",
-    issuer: "[Issuing Organization]",
-    credentialId: "[CREDENTIAL-ID]",
+    title: "TensorFlow Developer Specialization",
+    issuer: "DeepLearning.AI",
   },
   {
-    period: "2023",
-    title: "[Certification Name]",
-    issuer: "[Issuing Organization]",
-    credentialId: "[CREDENTIAL-ID]",
+    period: "2024",
+    title: "TensorFlow: Advanced Techniques",
+    issuer: "DeepLearning.AI",
+  },
+  {
+    period: "2024",
+    title: "Machine Learning Specialization",
+    issuer: "DeepLearning.AI / Coursera",
+  },
+  {
+    period: "2024",
+    title: "Generative AI for Everyone",
+    issuer: "DeepLearning.AI",
+  },
+  {
+    period: "2026",
+    title: "ICCN Contribution Appreciation Certificate",
+    issuer: "ICCN",
   },
 ];
 
@@ -94,7 +100,6 @@ export default function Education() {
               <span className={styles.entryPeriod}>{cert.period}</span>
               <span className={styles.entryTitle}>{cert.title}</span>
               <span className={styles.entryOrg}>{cert.issuer}</span>
-              <span className={styles.certBadge}>{cert.credentialId}</span>
             </div>
           ))}
         </div>

@@ -5,45 +5,55 @@ import { motion, useInView } from "framer-motion";
 import styles from "./Experience.module.css";
 import TextReveal from "./TextReveal";
 
-/* ─── Work Experience Data (placeholder — replace with real data) ─── */
+/* ─── Work Experience Data ─── */
 const EXPERIENCES = [
   {
-    period: "2024 — PRESENT",
-    company: "[Company Name]",
-    location: "[City, Country]",
-    role: "AI Engineer",
+    period: "OCT 2025 — APR 2026",
+    company: "PT Link Apisindo Media",
+    location: "Indonesia",
+    role: "AI Engineer — Internship",
     description: [
-      "Designed and built RAG-based knowledge retrieval systems for regulatory document processing",
-      "Developed multi-agent architectures using LangGraph for autonomous research tasks",
-      "Integrated Amazon Bedrock (Nova Pro/Lite) and DeepSeek models into production pipelines",
-      "Built and maintained FastAPI backend services handling concurrent AI workloads",
+      "Developed end-to-end AI systems: RAG-based chatbots, autonomous research agent, automated video processing pipelines",
+      "Designed scalable backend using FastAPI, LangGraph, and Redis (real-time sync & async task management)",
+      "Implemented LLM evaluation & monitoring with LangWatch and LangSmith (accuracy, latency, reliability)",
+      "Leveraged AWS Bedrock, DeepSeek, and Gemini for legal, information, and creative sectors",
+      "Configured OpenClaw setup & developed MCP to integrate ICCN RAG knowledge into OpenClaw (Telegram Bot)",
     ],
-    tags: ["LangGraph", "Amazon Bedrock", "RAG", "FastAPI"],
+    tags: ["LangGraph", "FastAPI", "Amazon Bedrock", "Redis", "LangWatch"],
   },
   {
-    period: "2023 — 2024",
-    company: "[Company Name]",
-    location: "[City, Country]",
-    role: "Software Engineer",
+    period: "OCT 2025 — NOV 2025",
+    company: "Research Project",
+    location: "Malang, Indonesia",
+    role: "Computer Vision Research Assistant",
     description: [
-      "Developed backend services and API integrations for data-intensive applications",
-      "Implemented database architectures with PostgreSQL for high-throughput systems",
-      "Collaborated with cross-functional teams to deliver production-ready features",
-      "Introduced automated testing pipelines improving code reliability",
+      "Managed and prepared instance segmentation datasets using Roboflow",
+      "Conducted experiments with multiple YOLOv8-seg variants",
+      "Contributed research insights on the impact of data augmentation combinations on model performance",
     ],
-    tags: ["Python", "PostgreSQL", "Docker", "REST API"],
+    tags: ["YOLOv8", "Roboflow", "Computer Vision", "Data Augmentation"],
   },
   {
-    period: "2022 — 2023",
-    company: "[Company Name]",
-    location: "[City, Country]",
-    role: "Junior Developer",
+    period: "JUL 2024 — AUG 2024",
+    company: "Dishub Kota Malang",
+    location: "Malang, Indonesia",
+    role: "Web Developer — Internship",
     description: [
-      "Built and maintained web applications using modern frameworks",
-      "Participated in code reviews and contributed to technical documentation",
-      "Assisted in migrating legacy systems to modern architectures",
+      "Developed a queue management website for live queue status monitoring",
+      "Built an internal web app to help staff generate reports efficiently",
     ],
-    tags: ["Python", "JavaScript", "Git"],
+    tags: ["Web Development", "Queue System"],
+  },
+  {
+    period: "FEB 2024 — JUN 2024",
+    company: "Bangkit Academy",
+    location: "Indonesia",
+    role: "Machine Learning Cohort",
+    description: [
+      "Completed ML courses via Coursera and Dicoding (by Google, Tokopedia, Gojek, Traveloka)",
+      "Collaborated in a multidisciplinary capstone team to develop a health-related mobile application",
+    ],
+    tags: ["Machine Learning", "TensorFlow", "Coursera", "Dicoding"],
   },
 ];
 

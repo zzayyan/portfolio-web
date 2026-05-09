@@ -5,119 +5,281 @@
 
 export const PROJECTS = [
   {
-    slug: "iccn-knowledge-agent",
+    slug: "iccn-ai-agent",
     index: "01",
-    name: "ICCN Knowledge Agent",
-    type: "RAG SYSTEM / CHATBOT",
+    name: "ICCN AI Agent Implementation",
+    type: "MULTI-AGENT / RAG SYSTEM",
     status: "PRODUCTION",
-    year: "2024",
+    year: "2026",
     shortDescription:
-      "Intelligent document retrieval system for Indonesian legal knowledge base. Processes regulatory documents through chunking and embedding pipelines for context-aware question answering.",
+      "Multi-agent AI system featuring a LangGraph-powered research agent with ReAct reasoning and a gamified data collection agent. Integrated with Tavily for real-time research and Redis for session management.",
     fullDescription: [
-      "The ICCN Knowledge Agent is a Retrieval-Augmented Generation system built to serve as an intelligent assistant for navigating Indonesian legal and regulatory documents. The system ingests, processes, and indexes large volumes of regulatory text, enabling users to ask natural language questions and receive accurate, context-grounded answers.",
-      "The architecture follows a classic RAG pipeline: documents are ingested, split into semantically meaningful chunks, embedded using Amazon Bedrock's Titan embedding model, and stored in a PostgreSQL database with pgvector for efficient similarity search. At query time, the user's question is embedded and matched against the vector store to retrieve relevant context, which is then fed to Amazon Nova Lite for synthesis.",
-      "Key engineering challenges included optimizing chunk boundaries for legal text (which has unique structural patterns), tuning retrieval precision vs. recall, and implementing a feedback loop for continuous improvement of answer quality.",
+      "The ICCN AI Agent Implementation consists of two major sub-projects: an AI Research Agent and a Ramalan Agent (Gamification Data Collector), both designed to serve the needs of the ICCN organization.",
+      "The AI Research Agent leverages LangGraph's multi-step reasoning with the ReAct paradigm, integrated with Tavily for real-time web research. It automates the synthesis of comprehensive Markdown reports with citations, working across multi-model LLMs for optimal results in different reasoning tasks.",
+      "The Ramalan Agent is a gamified task-oriented agent designed for user profiling and data collection. It uses Redis for session management across multi-turn conversations and implements async background tasks for UI responsiveness, creating an engaging experience for users while gathering valuable data.",
     ],
-    stack: "Python / LangGraph / Amazon Nova Lite / PostgreSQL / pgvector",
+    stack: "Python / LangGraph / Tavily / Redis / Multi-Model LLMs",
     stackList: [
-      "Python 3.11",
+      "Python",
       "LangGraph",
       "LangChain",
-      "Amazon Bedrock (Nova Lite)",
-      "Amazon Bedrock (Titan Embeddings)",
-      "PostgreSQL + pgvector",
-      "FastAPI",
-    ],
-    pattern:
-      "Document Ingestion → Chunking → Embedding → Vector Retrieval → LLM Synthesis",
-    diagram: `┌───────────────┐     ┌──────────────┐     ┌─────────────────┐
-│  USER QUERY   │────▶│  EMBEDDING   │────▶│ VECTOR RETRIEVAL│
-└───────────────┘     └──────────────┘     └─────────────────┘
-                                                    │
-                              ┌──────────────────────┘
-                              ▼
-                    ┌──────────────────┐     ┌──────────────┐
-                    │  CONTEXT WINDOW  │────▶│  LLM SYNTH   │
-                    └──────────────────┘     └──────────────┘`,
-  },
-  {
-    slug: "ganusa-research-agent",
-    index: "02",
-    name: "Ganusa Research Agent",
-    type: "MULTI-AGENT SYSTEM",
-    status: "ACTIVE DEVELOPMENT",
-    year: "2025",
-    shortDescription:
-      "Autonomous research system with multi-agent ReAct reasoning loop. Decomposes complex queries into sub-tasks, performs iterative web research, and synthesizes comprehensive reports.",
-    fullDescription: [
-      "Ganusa is a multi-agent research system designed to autonomously investigate complex topics by decomposing questions, performing iterative web research, and synthesizing findings into structured reports. The system uses a ReAct (Reasoning + Acting) loop architecture orchestrated through LangGraph's state machine framework.",
-      "The agent pipeline consists of three core agents: a Planner that decomposes the user's research question into sub-queries, a Reasoner that iteratively searches the web (via Tavily API), analyzes results, and determines if more research is needed, and a Synthesizer that compiles all findings into a coherent markdown or PDF report.",
-      "The system supports multiple LLM backends — Amazon Nova Pro for planning and synthesis tasks, and DeepSeek-Chat for reasoning steps that benefit from its strong analytical capabilities. The architecture is designed for extensibility, allowing new tool integrations and agent types to be added without modifying the core orchestration logic.",
-    ],
-    stack: "Python / LangGraph / Amazon Nova Pro / DeepSeek-Chat / Tavily",
-    stackList: [
-      "Python 3.11",
-      "LangGraph",
-      "LangChain",
-      "Amazon Bedrock (Nova Pro)",
-      "DeepSeek-Chat API",
       "Tavily Search API",
+      "Redis",
       "FastAPI",
+      "Amazon Bedrock",
     ],
     pattern:
-      "Planner → ReAct Reasoner Loop → Synthesizer → Markdown/PDF Export",
+      "ReAct Reasoning Loop → Multi-Step Research → Report Synthesis",
     diagram: `┌──────────────┐     ┌──────────────┐
-│   PLANNER    │────▶│   REASONER   │◀─── LOOP
+│   PLANNER    │────▶│   REASONER   │◀─── ReAct LOOP
 └──────────────┘     └──────┬───────┘
                             │
               ┌─────────────┼──────────────┐
               ▼             ▼              ▼
         ┌──────────┐ ┌──────────┐  ┌────────────┐
-        │  SEARCH  │ │  ANALYZE │  │  EVALUATE  │
+        │  TAVILY  │ │  ANALYZE │  │  EVALUATE  │
         └──────────┘ └──────────┘  └────────────┘
                             │
                             ▼
                     ┌──────────────┐
-                    │ SYNTHESIZER  │────▶ PDF/MD
+                    │ SYNTHESIZER  │────▶ MD Report
                     └──────────────┘`,
   },
   {
-    slug: "ai-content-pipeline",
-    index: "03",
-    name: "AI Content Pipeline",
-    type: "GENERATIVE AI / PIPELINE",
+    slug: "jdih-chatbot",
+    index: "02",
+    name: "JDIH Jawa Timur Chatbot",
+    type: "RAG SYSTEM / CHATBOT",
     status: "PRODUCTION",
+    year: "2026",
+    shortDescription:
+      "RAG-based legal information assistant with hybrid search (semantic & lexical) using Reciprocal Rank Fusion. Features real-time ingestion pipeline reducing document availability latency from ~24h to <1 minute.",
+    fullDescription: [
+      "The JDIH Jawa Timur Real-Time Chatbot is a Retrieval-Augmented Generation system built to serve as an intelligent assistant for navigating legal and regulatory documents in the East Java region.",
+      "The system implements Hybrid Search combining Semantic and Lexical approaches with Reciprocal Rank Fusion (RRF) to maximize retrieval accuracy. This dual-approach ensures both contextual understanding and exact term matching for legal queries.",
+      "A key innovation is the real-time ingestion pipeline that reduced new legal document availability latency from approximately 24 hours to less than 1 minute. The system also features Dynamic Regex Extraction for handling complex numbered legal document identifiers.",
+    ],
+    stack: "Python / FastAPI / ChromaDB / Amazon Bedrock",
+    stackList: [
+      "Python",
+      "FastAPI",
+      "ChromaDB",
+      "Amazon Bedrock",
+      "Hybrid Search (RRF)",
+    ],
+    pattern:
+      "Document Ingestion → Hybrid Search (Semantic + Lexical) → RRF Fusion → LLM Synthesis",
+    diagram: `┌───────────────┐     ┌──────────────┐     ┌─────────────────┐
+│  USER QUERY   │────▶│  EMBEDDING   │────▶│ SEMANTIC SEARCH │
+└───────────────┘     └──────────────┘     └────────┬────────┘
+        │                                           │
+        │             ┌──────────────┐              │
+        └────────────▶│ LEXICAL SRCH │──────┐       │
+                      └──────────────┘      ▼       ▼
+                                     ┌──────────────────┐
+                                     │    RRF FUSION    │
+                                     └────────┬─────────┘
+                                              ▼
+                                     ┌──────────────────┐
+                                     │   LLM SYNTHESIS  │
+                                     └──────────────────┘`,
+  },
+  {
+    slug: "ai-clipper",
+    index: "03",
+    name: "AI Clipper",
+    type: "VIDEO PROCESSING / PIPELINE",
+    status: "PRODUCTION",
+    year: "2026",
+    shortDescription:
+      "End-to-end pipeline for extracting viral clips from YouTube/local video. Features Faster-Whisper transcription, Amazon Bedrock semantic analysis, and OpenCV-based smart crop for automatic 16:9 → 9:16 reframing.",
+    fullDescription: [
+      "AI Clipper is an end-to-end automated pipeline designed to extract viral-worthy clips from long-form YouTube or local video content, optimized for short-form social media platforms.",
+      "The system uses Faster-Whisper for high-accuracy audio transcription, then leverages Amazon Bedrock for semantic analysis to identify the most engaging and viral-potential segments from the transcript.",
+      "A standout feature is the 'Smart Crop' capability powered by OpenCV face detection, which automatically reframes content from landscape 16:9 to portrait 9:16 format, ensuring subjects remain centered and visible for mobile-first consumption.",
+    ],
+    stack: "Python / Faster-Whisper / Amazon Bedrock / OpenCV",
+    stackList: [
+      "Python",
+      "Faster-Whisper",
+      "Amazon Bedrock",
+      "OpenCV",
+      "FFmpeg",
+    ],
+    pattern:
+      "Video Ingestion → Transcription → Semantic Analysis → Smart Crop → Export",
+    diagram: `┌──────────────┐     ┌──────────────┐     ┌──────────────┐
+│  VIDEO INPUT │────▶│  TRANSCRIBE  │────▶│   ANALYZE    │
+└──────────────┘     │ Faster-Whisp │     │ Amazon Bedr. │
+                     └──────────────┘     └──────┬───────┘
+                                                 │
+                                                 ▼
+                                         ┌──────────────┐
+                                         │  SMART CROP  │
+                                         │   OpenCV     │
+                                         └──────┬───────┘
+                                                 │
+                                    ┌────────────┼────────────┐
+                                    ▼            ▼            ▼
+                              ┌─────────┐ ┌──────────┐ ┌──────────┐
+                              │  16:9   │ │   9:16   │ │  SHORTS  │
+                              └─────────┘ └──────────┘ └──────────┘`,
+  },
+  {
+    slug: "klinikhoax-ai",
+    index: "04",
+    name: "KlinikHoax AI",
+    type: "FACT-CHECKING / CHATBOT",
+    status: "COMPLETED",
+    year: "2025",
+    shortDescription:
+      "Chatbot fact-checking system powered by LangFlow and Amazon Nova. Features AI-driven cross-referencing with Google Search in real-time and end-to-end user ticket tracking.",
+    fullDescription: [
+      "KlinikHoax AI is an AI-powered fact-checking chatbot built to combat misinformation by providing users with verified, evidence-based responses to their queries about potentially false claims.",
+      "The system leverages LangFlow for orchestrating the AI pipeline and Amazon Nova as the core LLM. When a user submits a claim for verification, the AI Fact-Check module cross-references the report with Google Search results in real-time to validate or debunk the claim.",
+      "The platform also includes a comprehensive end-to-end ticket tracking system, allowing users to submit reports, track the verification progress, and receive detailed fact-check results — creating a complete misinformation response workflow.",
+    ],
+    stack: "Python / LangFlow / Amazon Nova / Google Search API",
+    stackList: [
+      "Python",
+      "LangFlow",
+      "Amazon Nova",
+      "Google Search API",
+      "FastAPI",
+    ],
+    pattern:
+      "User Report → AI Analysis → Real-time Cross-Reference → Fact-Check Result",
+    diagram: `┌──────────────┐     ┌──────────────┐     ┌──────────────┐
+│ USER REPORT  │────▶│  AI ANALYZE  │────▶│ CROSS-CHECK  │
+└──────────────┘     │  LangFlow    │     │ Google Search│
+                     └──────────────┘     └──────┬───────┘
+                                                 │
+                                                 ▼
+                                         ┌──────────────┐
+                                         │ FACT VERDICT │
+                                         └──────┬───────┘
+                                                 │
+                                                 ▼
+                                         ┌──────────────┐
+                                         │TICKET SYSTEM │
+                                         └──────────────┘`,
+  },
+  {
+    slug: "bisindo-detection",
+    index: "05",
+    name: "BISINDO Sign Language Detection",
+    type: "COMPUTER VISION / THESIS",
+    status: "COMPLETED",
+    year: "2025",
+    shortDescription:
+      "Instance segmentation model using YOLOv8 for detecting BISINDO (Indonesian Sign Language) alphabets. Full pipeline from data collection, annotation, cleaning, and augmentation using Roboflow.",
+    fullDescription: [
+      "BISINDO Sign Language Detection is a thesis project focused on building an instance segmentation model to detect and recognize Indonesian Sign Language (BISINDO) alphabet gestures in real-time.",
+      "The project implements YOLOv8 instance segmentation with a complete ML pipeline: data collection, annotation using Roboflow, data cleaning, and various augmentation strategies to improve model robustness.",
+      "A key contribution of the research is the evaluation of model performance across different data split scenarios and augmentation combination strategies, providing insights into optimal training configurations for sign language detection tasks.",
+    ],
+    stack: "Python / YOLOv8 / Roboflow / Computer Vision",
+    stackList: [
+      "Python",
+      "YOLOv8",
+      "Roboflow",
+      "OpenCV",
+      "Instance Segmentation",
+    ],
+    pattern:
+      "Data Collection → Annotation → Augmentation → Training → Evaluation",
+    diagram: `┌──────────────┐     ┌──────────────┐     ┌──────────────┐
+│    COLLECT   │────▶│   ANNOTATE   │────▶│   AUGMENT    │
+│    Data      │     │   Roboflow   │     │  Strategies  │
+└──────────────┘     └──────────────┘     └──────┬───────┘
+                                                 │
+                                                 ▼
+                                         ┌──────────────┐
+                                         │  TRAIN YOLO  │
+                                         │  v8-seg      │
+                                         └──────┬───────┘
+                                                 │
+                                                 ▼
+                                         ┌──────────────┐
+                                         │  EVALUATE    │
+                                         │ Cross-Split  │
+                                         └──────────────┘`,
+  },
+  {
+    slug: "fitfood-classification",
+    index: "06",
+    name: "FitFood Image Classification",
+    type: "DEEP LEARNING / MOBILE",
+    status: "COMPLETED",
     year: "2024",
     shortDescription:
-      "Automated content processing pipeline that ingests raw media, applies AI-driven analysis, and generates structured outputs for downstream consumption.",
+      "Multi-label deep learning model for 40+ Indonesian traditional foods using Transfer Learning with InceptionV3. Converted to TensorFlow Lite for Android deployment.",
     fullDescription: [
-      "The AI Content Pipeline is an automated system that processes raw media content — primarily audio and video — through a series of AI-powered stages to produce structured, searchable, and actionable outputs. The pipeline handles ingestion, transcription, analysis, and multi-format export.",
-      "Raw media files are ingested and pre-processed using FFmpeg for format normalization and segmentation. Audio is transcribed using OpenAI's Whisper model, producing high-accuracy transcripts that serve as the foundation for downstream analysis. GPT-4o then performs content analysis, extracting key topics, summaries, timestamps, and actionable items.",
-      "The system is built on FastAPI for its async capabilities, enabling concurrent processing of multiple media files. Output formats include structured JSON for API consumption, markdown for human-readable reports, and PDF for formal documentation. The pipeline is designed to be modular, allowing individual stages to be replaced or upgraded independently.",
+      "FitFood is a multi-label image classification system designed to identify over 40 types of Indonesian traditional foods from photographs, built as part of a health-related mobile application.",
+      "The model leverages Transfer Learning with InceptionV3 as the base architecture, with fine-tuning of 60+ top layers to adapt the pre-trained features specifically for Indonesian food recognition.",
+      "For mobile deployment, the trained model is converted to TensorFlow Lite (.tflite) format, enabling real-time on-device inference on Android smartphones without requiring network connectivity for predictions.",
     ],
-    stack: "Python / FFmpeg / Whisper / GPT-4o / FastAPI",
+    stack: "Python / TensorFlow / InceptionV3 / TFLite",
     stackList: [
-      "Python 3.11",
-      "FFmpeg",
-      "OpenAI Whisper",
-      "OpenAI GPT-4o",
-      "FastAPI",
-      "Celery (task queue)",
+      "Python",
+      "TensorFlow",
+      "InceptionV3",
+      "TensorFlow Lite",
+      "Android",
     ],
-    pattern: "Ingestion → Transcription → Analysis → Generation → Export",
+    pattern:
+      "Transfer Learning → Fine-Tuning → TFLite Conversion → Mobile Deployment",
     diagram: `┌──────────────┐     ┌──────────────┐     ┌──────────────┐
-│  INGESTION   │────▶│ TRANSCRIBER  │────▶│   ANALYZER   │
-└──────────────┘     └──────────────┘     └──────────────┘
-                                                  │
-                                                  ▼
-                                          ┌──────────────┐
-                                          │  GENERATOR   │
-                                          └──────┬───────┘
+│  DATASET     │────▶│ InceptionV3  │────▶│  FINE-TUNE   │
+│  40+ Foods   │     │  Base Model  │     │  60+ layers  │
+└──────────────┘     └──────────────┘     └──────┬───────┘
                                                  │
-                              ┌──────────────────┼──────────┐
-                              ▼                  ▼          ▼
-                        ┌──────────┐      ┌─────────┐ ┌────────┐
-                        │   JSON   │      │   MD    │ │  PDF   │
-                        └──────────┘      └─────────┘ └────────┘`,
+                                                 ▼
+                                         ┌──────────────┐
+                                         │  CONVERT     │
+                                         │  → .tflite   │
+                                         └──────┬───────┘
+                                                 │
+                                                 ▼
+                                         ┌──────────────┐
+                                         │  ANDROID APP │
+                                         │  On-Device   │
+                                         └──────────────┘`,
+  },
+  {
+    slug: "rogue-of-logic",
+    index: "07",
+    name: "Rogue of Logic Game",
+    type: "GAME DEVELOPMENT",
+    status: "COMPLETED",
+    year: "2023",
+    shortDescription:
+      "Game project with high-quality sound effects implementation and UI coding based on design specifications.",
+    fullDescription: [
+      "Rogue of Logic is a game development project where the primary contributions focused on implementing high-quality sound effects and coding the user interface based on provided design specifications.",
+      "The project involved close collaboration with the design team to translate visual mockups into functional game UI elements, ensuring pixel-perfect implementation of the design vision.",
+      "Sound design work included selecting, editing, and integrating audio assets to create an immersive gaming experience that complemented the visual gameplay elements.",
+    ],
+    stack: "Game Development / Sound Design / UI Implementation",
+    stackList: [
+      "Game Dev",
+      "Sound Effects",
+      "UI/UX Implementation",
+    ],
+    pattern:
+      "Design Specs → UI Implementation → Sound Integration → Testing",
+    diagram: `┌──────────────┐     ┌──────────────┐
+│ DESIGN SPECS │────▶│  UI CODING   │
+└──────────────┘     └──────┬───────┘
+                            │
+                            ▼
+                    ┌──────────────┐
+                    │ SOUND DESIGN │
+                    └──────┬───────┘
+                            │
+                            ▼
+                    ┌──────────────┐
+                    │  INTEGRATE   │
+                    └──────────────┘`,
   },
 ];

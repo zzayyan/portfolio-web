@@ -5,9 +5,9 @@ import { motion, useInView } from "framer-motion";
 import styles from "./Contact.module.css";
 
 const CONTACT_LINKS = [
-  { label: "EMAIL_", href: "mailto:your@email.com" },
-  { label: "GITHUB_", href: "https://github.com" },
-  { label: "LINKEDIN_", href: "https://linkedin.com" },
+  { label: "EMAIL_", href: "mailto:brilliantazayyan@gmail.com" },
+  { label: "GITHUB_", href: "https://github.com/zzayyan" },
+  { label: "LINKEDIN_", href: "https://linkedin.com/in/brilliantazayyanm" },
   { label: "RESUME.PDF_", href: "#" },
 ];
 
