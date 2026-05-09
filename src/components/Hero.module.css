@@ -89,6 +89,24 @@
   color: var(--color-mass);
 }
 
+/* ─── 2.5 Profile Photo ─── */
+.photoWrapper {
+  position: absolute;
+  right: var(--grid-margin);
+  bottom: 48px; /* sits above anchor bar */
+  width: clamp(260px, 28vw, 440px);
+  pointer-events: none;
+  user-select: none;
+}
+
+.photo {
+  width: 100%;
+  height: auto;
+  display: block;
+  mix-blend-mode: multiply; /* transparent PNG blends cleanly on white bg */
+  filter: contrast(1.04);
+}
+
 /* ─── Responsive: Tablet ─── */
 @media (max-width: 1279px) {
   .hero {
@@ -112,6 +130,11 @@
   .roleDescriptor {
     grid-column: 1 / -1;
   }
+
+  .photoWrapper {
+    width: clamp(180px, 22vw, 280px);
+    opacity: 0.5;
+  }
 }
 
 /* ─── Responsive: Mobile ─── */
@@ -133,5 +156,9 @@
   .roleDescriptor {
     grid-column: 1 / -1;
     font-size: var(--t-body);
+  }
+
+  .photoWrapper {
+    display: none;
   }
 }

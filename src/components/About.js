@@ -1,7 +1,9 @@
 "use client";
 
+import { useRef, useCallback } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import Image from "next/image";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import styles from "./About.module.css";
 import TextReveal from "./TextReveal";
 
@@ -34,6 +36,29 @@ const fadeUp = {
 };
 
 export default function About() {
+  /* ─── 3D Parallax Mouse Tracking ─── */
+  const photoRef = useRef(null);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const spring = { stiffness: 150, damping: 20, mass: 0.5 };
+  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [6, -6]), spring);
+  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-6, 6]), spring);
+  const shadowX = useSpring(useTransform(mouseX, [-0.5, 0.5], [15, -15]), spring);
+  const shadowY = useSpring(useTransform(mouseY, [-0.5, 0.5], [15, -15]), spring);
+
+  const handleMouseMove = useCallback((e) => {
+    const rect = photoRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    mouseX.set((e.clientX - rect.left) / rect.width - 0.5);
+    mouseY.set((e.clientY - rect.top) / rect.height - 0.5);
+  }, [mouseX, mouseY]);
+
+  const handleMouseLeave = useCallback(() => {
+    mouseX.set(0);
+    mouseY.set(0);
+  }, [mouseX, mouseY]);
+
   const handleScrollTo = (e, targetId) => {
     e.preventDefault();
     const target = document.querySelector(targetId);
@@ -117,14 +142,36 @@ export default function About() {
           </motion.div>
         </div>
 
-        {/* Right Column — Photo */}
+        {/* Right Column — Photo with 3D Pop-Out */}
         <motion.div
           {...fadeUp}
           transition={{ ...fadeUp.transition, delay: 0.1 }}
           className={styles.rightCol}
         >
-          <div className={styles.photoWrapper}>
-            <span className={styles.photoPlaceholder}>[ PHOTO ]</span>
+          <div
+            className={styles.photoScene}
+            ref={photoRef}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+          >
+            <div className={styles.photoBackdrop} />
+            <motion.div
+              className={styles.photoWrapper}
+              style={{ rotateX, rotateY, transformPerspective: 800 }}
+            >
+              <motion.div
+                className={styles.photoShadow}
+                style={{ x: shadowX, y: shadowY }}
+              />
+              <Image
+                src="/profile.png"
+                alt="Brillianta Zayyan Muhammad"
+                fill
+                className={styles.photoImage}
+                sizes="(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 40vw"
+                priority
+              />
+            </motion.div>
           </div>
         </motion.div>
       </div>

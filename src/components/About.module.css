@@ -203,37 +203,110 @@
   justify-content: center;
   align-self: stretch;
   padding-top: 24px;
+  padding-bottom: 80px;
 }
 
+/* Scene — perspective container + mouse interaction area */
+.photoScene {
+  width: 100%;
+  height: 100%;
+  min-height: 400px;
+  position: relative;
+}
+
+/* Backdrop glow — appears on hover */
+.photoBackdrop {
+  position: absolute;
+  inset: -24px;
+  background: radial-gradient(
+    ellipse at center 40%,
+    rgba(0, 0, 0, 0.05) 0%,
+    transparent 70%
+  );
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.photoScene:hover .photoBackdrop {
+  opacity: 1;
+}
+
+/* Wrapper — the 3D card that tilts with mouse */
 .photoWrapper {
   width: 100%;
   height: 100%;
   min-height: 400px;
-  border: 1px solid var(--color-mass);
+  border: none;
   position: relative;
-  overflow: hidden;
-  background-color: var(--color-ground);
+  overflow: visible;
+  background-color: transparent;
+  will-change: transform;
 }
 
-.photoPlaceholder {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-mono-family);
-  font-size: var(--t-meta);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--color-mass);
-  opacity: 0.3;
+/* Frame: top + left + right borders — IN FRONT of image */
+.photoWrapper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--color-mass);
+  border-bottom: none;
+  z-index: 3;
+  pointer-events: none;
 }
 
+/* Frame: bottom border — BEHIND image (photo breaks through) */
+.photoWrapper::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-bottom: 1px solid var(--color-mass);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Drop shadow — creates floating depth */
+.photoShadow {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  right: -5%;
+  bottom: -60px;
+  background: rgba(0, 0, 0, 0.08);
+  filter: blur(28px);
+  border-radius: 8px;
+  z-index: -1;
+  pointer-events: none;
+  transition: filter 0.4s ease, opacity 0.4s ease;
+}
+
+.photoScene:hover .photoShadow {
+  filter: blur(36px);
+  opacity: 0.6;
+}
+
+/* Photo image — extends below frame for break-out */
 .photoImage {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: -80px !important;
+  height: calc(100% + 80px) !important;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
+  object-fit: contain;
+  object-position: center bottom;
+  z-index: 1;
+  filter: grayscale(1);
+  transition: filter 0.5s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.photoScene:hover .photoImage {
+  filter: grayscale(0);
+  transform: scale(1.03);
 }
 
 /* ─── Marquee Ticker ─── */
@@ -325,11 +398,26 @@
     grid-column: 1 / -1;
     grid-row: 1;
     margin-bottom: 24px;
+    padding-bottom: 40px;
+  }
+
+  .photoScene {
+    min-height: auto;
+  }
+
+  .photoBackdrop,
+  .photoShadow {
+    display: none;
   }
 
   .photoWrapper {
     min-height: 280px;
     max-height: 340px;
+  }
+
+  .photoImage {
+    bottom: -40px !important;
+    height: calc(100% + 40px) !important;
   }
 
   .leftCol {
