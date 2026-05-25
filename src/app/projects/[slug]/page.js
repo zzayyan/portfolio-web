@@ -142,23 +142,6 @@ export default async function ProjectDetail({ params }) {
           </ul>
         </div>
       </div>
-
-      {/* Architecture Diagram */}
-      <div className={styles.diagramSection}>
-        <span className={styles.diagramLabel}>ARCHITECTURE DIAGRAM</span>
-        <pre
-          className={styles.diagram}
-          aria-label={`Architecture diagram for ${project.name}`}
-        >
-          {project.diagram}
-        </pre>
-      </div>
-
-      {/* Architecture Pattern */}
-      <div className={styles.patternSection}>
-        <span className={styles.sectionLabel}>ARCHITECTURE PATTERN</span>
-        <p className={styles.patternText}>{project.pattern}</p>
-      </div>
         </div>
       </PageTransition>
     </>

@@ -160,49 +160,7 @@
   border-bottom: none;
 }
 
-/* ─── Architecture Diagram ─── */
-.diagramSection {
-  border: 1px solid var(--color-mass);
-  padding: 48px;
-  margin-bottom: 64px;
-  background-color: var(--color-mass);
-  color: var(--color-ground);
-}
 
-.diagramLabel {
-  font-family: var(--font-mono-family);
-  font-size: var(--t-meta);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--color-ground);
-  display: block;
-  margin-bottom: 32px;
-}
-
-.diagram {
-  font-family: var(--font-mono-family);
-  font-size: 13px;
-  line-height: 1.5;
-  white-space: pre;
-  letter-spacing: 0;
-  text-transform: none;
-  color: var(--color-ground);
-  overflow-x: auto;
-}
-
-/* ─── Pattern ─── */
-.patternSection {
-  border-top: 1px solid var(--color-mass);
-  padding-top: 32px;
-}
-
-.patternText {
-  font-family: var(--font-mono-family);
-  font-size: var(--t-caption);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--color-mass);
-}
 
 /* ─── Responsive: Tablet ─── */
 @media (max-width: 1279px) {
@@ -240,14 +198,6 @@
 
   .projectTitle {
     font-size: var(--t-h2);
-  }
-
-  .diagramSection {
-    padding: 24px;
-  }
-
-  .diagram {
-    font-size: 10px;
   }
 }
 
