@@ -7,6 +7,8 @@ import { PROJECTS } from "@/data/projects";
 import styles from "./Projects.module.css";
 import TextReveal from "./TextReveal";
 
+const FEATURED = PROJECTS.slice(0, 4);
+
 export default function Projects() {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-10% 0px" });
@@ -22,9 +24,9 @@ export default function Projects() {
         <TextReveal as="h2" lines={["PROJECTS"]} className={styles.headerTitle} />
       </div>
 
-      {/* 2-Column Grid */}
+      {/* 2-Column Grid — Featured 4 only */}
       <div className={styles.grid}>
-        {PROJECTS.map((project, i) => (
+        {FEATURED.map((project, i) => (
           <motion.div
             key={project.index}
             initial={{ opacity: 0, y: 32 }}
@@ -32,7 +34,7 @@ export default function Projects() {
             transition={{
               duration: 0.5,
               ease: [0.16, 1, 0.3, 1],
-              delay: i * 0.1,
+              delay: i * 0.08,
             }}
           >
             <Link
@@ -66,6 +68,14 @@ export default function Projects() {
             </Link>
           </motion.div>
         ))}
+      </div>
+
+      {/* See All Projects — Link to /projects page */}
+      <div className={styles.seeMoreContainer}>
+        <Link href="/projects" className={styles.seeMoreButton}>
+          <span>SEE ALL PROJECTS</span>
+          <span className={styles.buttonIcon}>→</span>
+        </Link>
       </div>
     </section>
   );

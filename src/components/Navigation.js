@@ -10,6 +10,7 @@ const NAV_ITEMS = [
   { label: "ABOUT_", href: "/about", type: "link" },
   { label: "EXPERIENCE_", href: "#experience", type: "scroll" },
   { label: "PROJECTS_", href: "#projects", type: "scroll" },
+  { label: "EDU & CERT_", href: "#education", type: "scroll" },
   { label: "CONTACT_", href: "#contact", type: "scroll" },
 ];
 
@@ -23,7 +24,7 @@ export default function Navigation() {
   useEffect(() => {
     if (!isHome) return;
 
-    const sectionIds = ["about", "experience", "projects", "contact"];
+    const sectionIds = ["about", "experience", "projects", "education", "contact"];
     const observers = [];
 
     sectionIds.forEach((id) => {
