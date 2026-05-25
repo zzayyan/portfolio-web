@@ -47,6 +47,20 @@ export default function Navigation() {
     return () => observers.forEach((o) => o.disconnect());
   }, [isHome]);
 
+  /* ─── Scroll to hash on page mount or route change ─── */
+  useEffect(() => {
+    if (isHome && typeof window !== "undefined" && window.location.hash) {
+      const hash = window.location.hash;
+      const target = document.querySelector(hash);
+      if (target) {
+        const timer = setTimeout(() => {
+          target.scrollIntoView({ behavior: "smooth" });
+        }, 300);
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [isHome, pathname]);
+
   /* ─── Lock body scroll when mobile menu open ─── */
   useEffect(() => {
     if (mobileOpen) {

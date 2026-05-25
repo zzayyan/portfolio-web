@@ -11,6 +11,11 @@ export const PROJECTS = [
     type: "MULTI-AGENT / RAG SYSTEM",
     status: "PRODUCTION",
     year: "2026",
+    demoUrl: null,
+    demoLinks: [
+      { label: "ICCN CHATBOT", url: "https://next.iccn.or.id/", note: "Type \"ramalan karir\" to access the gamification data collector." },
+      { label: "AI RESEARCH AGENT", url: "https://next.iccn.or.id/dashboard/super-agent-ai", note: "Login required to access the AI Research Agent dashboard." },
+    ],
     shortDescription:
       "Multi-agent AI system featuring a LangGraph-powered research agent with ReAct reasoning and a gamified data collection agent. Integrated with Tavily for real-time research and Redis for session management.",
     fullDescription: [
@@ -52,6 +57,7 @@ export const PROJECTS = [
     type: "RAG SYSTEM / CHATBOT",
     status: "PRODUCTION",
     year: "2026",
+    demoUrl: "https://jdih.jatimprov.go.id/",
     shortDescription:
       "RAG-based legal information assistant with hybrid search (semantic & lexical) using Reciprocal Rank Fusion. Features real-time ingestion pipeline reducing document availability latency from ~24h to <1 minute.",
     fullDescription: [

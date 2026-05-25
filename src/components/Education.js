@@ -33,6 +33,11 @@ const CERTIFICATIONS = [
   },
   {
     period: "2024",
+    title: "TensorFlow: Data and Deployment",
+    issuer: "DeepLearning.AI",
+  },
+  {
+    period: "2024",
     title: "Machine Learning Specialization",
     issuer: "DeepLearning.AI / Coursera",
   },
@@ -42,9 +47,35 @@ const CERTIFICATIONS = [
     issuer: "DeepLearning.AI",
   },
   {
+    period: "2024",
+    title: "Learn Data Analysis with Python",
+    issuer: "Dicoding",
+  },
+  {
     period: "2026",
     title: "ICCN Contribution Appreciation Certificate",
     issuer: "ICCN",
+  },
+  {
+    period: "2023 — 2024",
+    title: "Additional certs: programming, Python, Git, data viz, ML math",
+    issuer: "Dicoding, Coursera (Google & IBM)",
+  },
+];
+
+/* ─── Awards & Competitions Data ─── */
+const AWARDS = [
+  {
+    period: "Aug 2024",
+    title: "Indonesia Investors Day in Bali",
+    award: "Bronze Award / 3rd Place",
+    detail: "Ideated health-related mobile app concept. Role: ML Engineer (core ML) + secondary mobile dev.",
+  },
+  {
+    period: "Nov 2023",
+    title: "Satu Data Infographics",
+    award: "Participant",
+    detail: "Role: Team Leader. Conducted data analysis & visualization using Tableau.",
   },
 ];
 
@@ -79,17 +110,33 @@ export default function Education() {
       >
         {/* Education Column */}
         <div className={styles.eduCol}>
-          <h3 className={styles.subHeader}>EDUCATION</h3>
-          {EDUCATION.map((edu, i) => (
-            <div key={i} className={styles.entry}>
-              <span className={styles.entryPeriod}>{edu.period}</span>
-              <span className={styles.entryTitle}>{edu.title}</span>
-              <span className={styles.entryOrg}>{edu.institution}</span>
-              {edu.detail && (
-                <span className={styles.entryDetail}>{edu.detail}</span>
-              )}
-            </div>
-          ))}
+          <div>
+            <h3 className={styles.subHeader}>EDUCATION</h3>
+            {EDUCATION.map((edu, i) => (
+              <div key={i} className={styles.entry}>
+                <span className={styles.entryPeriod}>{edu.period}</span>
+                <span className={styles.entryTitle}>{edu.title}</span>
+                <span className={styles.entryOrg}>{edu.institution}</span>
+                {edu.detail && (
+                  <span className={styles.entryDetail}>{edu.detail}</span>
+                )}
+              </div>
+            ))}
+          </div>
+
+          <div>
+            <h3 className={styles.subHeader}>AWARDS & COMPETITIONS</h3>
+            {AWARDS.map((award, i) => (
+              <div key={i} className={styles.entry}>
+                <span className={styles.entryPeriod}>{award.period}</span>
+                <span className={styles.entryTitle}>{award.title}</span>
+                <span className={styles.entryOrg}>{award.award}</span>
+                {award.detail && (
+                  <span className={styles.entryDetail}>{award.detail}</span>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Certifications Column */}

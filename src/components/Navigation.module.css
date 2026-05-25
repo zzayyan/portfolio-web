@@ -86,7 +86,7 @@
   background-color: var(--color-mass);
   position: absolute;
   left: 0;
-  transition: none;
+  transition: transform 0.15s ease, top 0.15s ease, opacity 0.15s ease;
 }
 
 .hamburgerLine:nth-child(1) {
@@ -148,6 +148,7 @@
     padding: 0 var(--grid-margin);
     opacity: 0;
     pointer-events: none;
+    transition: opacity 0.15s ease;
   }
 
   .mobileOverlayOpen {

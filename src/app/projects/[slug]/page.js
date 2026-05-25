@@ -1,6 +1,10 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PROJECTS } from "@/data/projects";
+import Navigation from "@/components/Navigation";
+import ScrollProgress from "@/components/ScrollProgress";
+import PageTransition from "@/components/PageTransition";
+import ScrollToTop from "@/components/ScrollToTop";
 import styles from "./page.module.css";
 
 /* ─── Static Params for SSG ─── */
@@ -40,11 +44,16 @@ export default async function ProjectDetail({ params }) {
   }
 
   return (
-    <div className={`${styles.page} section-light`}>
-      {/* Back Link */}
-      <Link href="/#projects" className={styles.backLink}>
-        ← BACK TO PROJECTS
-      </Link>
+    <>
+      <Navigation />
+      <ScrollProgress />
+      <ScrollToTop />
+      <PageTransition>
+        <div className={`${styles.page} section-light`}>
+          {/* Back Link */}
+          <Link href="/projects" className={styles.backLink}>
+            ← BACK TO PROJECTS
+          </Link>
 
       {/* Header */}
       <header className={styles.header}>
@@ -74,6 +83,42 @@ export default async function ProjectDetail({ params }) {
           <span className={styles.metaValue}>{project.stack}</span>
         </div>
       </div>
+
+      {/* Live Demo Link(s) */}
+      {(project.demoUrl || project.demoLinks?.length > 0) && (
+        <div className={styles.demoSection}>
+          {project.demoLinks?.length > 0
+            ? project.demoLinks.map((link) => (
+                <div key={link.url} className={styles.demoItem}>
+                  <a
+                    href={link.url}
+                    className={styles.demoButton}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <span className={styles.demoPulse} />
+                    <span>{link.label}</span>
+                    <span>↗</span>
+                  </a>
+                  {link.note && (
+                    <span className={styles.demoNote}>{link.note}</span>
+                  )}
+                </div>
+              ))
+            : (
+                <a
+                  href={project.demoUrl}
+                  className={styles.demoButton}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span className={styles.demoPulse} />
+                  <span>LIVE DEMO</span>
+                  <span>↗</span>
+                </a>
+              )}
+        </div>
+      )}
 
       {/* Content Grid — Description + Stack List */}
       <div className={styles.contentGrid}>
@@ -114,6 +159,8 @@ export default async function ProjectDetail({ params }) {
         <span className={styles.sectionLabel}>ARCHITECTURE PATTERN</span>
         <p className={styles.patternText}>{project.pattern}</p>
       </div>
-    </div>
+        </div>
+      </PageTransition>
+    </>
   );
 }

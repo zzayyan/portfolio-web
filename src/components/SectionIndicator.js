@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import styles from "./SectionIndicator.module.css";
 
 const SECTIONS = [
@@ -14,6 +15,9 @@ const SECTIONS = [
 export default function SectionIndicator() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [hasScrolled, setHasScrolled] = useState(false);
+  const pathname = usePathname();
+
+  if (pathname !== "/") return null;
 
   /* Show indicator only after user scrolls */
   useEffect(() => {

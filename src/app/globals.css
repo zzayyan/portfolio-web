@@ -55,7 +55,6 @@
   --nav-height: 56px;
 
   /* Motion */
-  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --duration-enter: 400ms;
 }
 

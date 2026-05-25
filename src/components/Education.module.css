@@ -33,6 +33,9 @@
 /* ─── Education Column ─── */
 .eduCol {
   grid-column: 1 / 7;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
 }
 
 .certCol {

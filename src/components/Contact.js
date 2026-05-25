@@ -8,7 +8,7 @@ const CONTACT_LINKS = [
   { label: "EMAIL_", href: "mailto:brilliantazayyan@gmail.com" },
   { label: "GITHUB_", href: "https://github.com/zzayyan" },
   { label: "LINKEDIN_", href: "https://linkedin.com/in/brilliantazayyanm" },
-  { label: "RESUME.PDF_", href: "#" },
+  { label: "RESUME.PDF_", href: "/resume.pdf" },
 ];
 
 export default function Contact() {
@@ -62,9 +62,9 @@ export default function Contact() {
               <a
                 href={link.href}
                 className={styles.contactLink}
-                target={link.href.startsWith("http") ? "_blank" : undefined}
+                target={link.href.startsWith("http") || link.href.endsWith(".pdf") ? "_blank" : undefined}
                 rel={
-                  link.href.startsWith("http")
+                  link.href.startsWith("http") || link.href.endsWith(".pdf")
                     ? "noopener noreferrer"
                     : undefined
                 }
