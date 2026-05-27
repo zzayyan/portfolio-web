@@ -11,6 +11,7 @@ export default function VideoPreview({ src, poster, projectName }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [videoReady, setVideoReady] = useState(false);
   const [isNearViewport, setIsNearViewport] = useState(false);
+  const [posterLoaded, setPosterLoaded] = useState(false);
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
@@ -109,7 +110,7 @@ export default function VideoPreview({ src, poster, projectName }) {
           onMouseLeave={handleMouseLeave}
           onClick={handleTap}
         >
-          {/* Poster image shown while loading or when not mounted */}
+          {/* Poster image — instant visual while video loads */}
           {poster && (
             <img
               src={poster}
@@ -117,6 +118,8 @@ export default function VideoPreview({ src, poster, projectName }) {
               className={`${styles.poster} ${
                 videoReady ? styles.posterHidden : ""
               }`}
+              onLoad={() => setPosterLoaded(true)}
+              onError={() => setPosterLoaded(false)}
             />
           )}
 
@@ -139,8 +142,8 @@ export default function VideoPreview({ src, poster, projectName }) {
             </video>
           )}
 
-          {/* Placeholder — only when video unavailable and no poster */}
-          {!videoReady && !poster && (
+          {/* Placeholder — fallback when no poster or poster failed */}
+          {!videoReady && !posterLoaded && (
             <div className={styles.placeholder}>
               <div className={styles.scanlines} />
               <div className={styles.placeholderCenter}>
