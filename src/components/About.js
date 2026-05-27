@@ -3,6 +3,7 @@
 import { useRef, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import profileImg from "../../public/profile.png";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import styles from "./About.module.css";
 import TextReveal from "./TextReveal";
@@ -164,9 +165,10 @@ export default function About() {
                 style={{ x: shadowX, y: shadowY }}
               />
               <Image
-                src="/profile.png"
+                src={profileImg}
                 alt="Brillianta Zayyan Muhammad"
                 fill
+                placeholder="blur"
                 className={styles.photoImage}
                 sizes="(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 40vw"
                 priority

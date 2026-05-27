@@ -5,6 +5,7 @@ import Navigation from "@/components/Navigation";
 import ScrollProgress from "@/components/ScrollProgress";
 import PageTransition from "@/components/PageTransition";
 import ScrollToTop from "@/components/ScrollToTop";
+import VideoPreview from "@/components/VideoPreview";
 import styles from "./page.module.css";
 
 /* ─── Static Params for SSG ─── */
@@ -118,6 +119,15 @@ export default async function ProjectDetail({ params }) {
                 </a>
               )}
         </div>
+      )}
+
+      {/* Video Preview */}
+      {project.videoPreview && (
+        <VideoPreview
+          src={project.videoPreview}
+          poster={project.videoPoster}
+          projectName={project.name}
+        />
       )}
 
       {/* Content Grid — Description + Stack List */}

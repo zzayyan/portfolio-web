@@ -1,0 +1,365 @@
+/* ═══════════════════════════════════════
+   VIDEO PREVIEW — Liquid Glass / iOS 26
+   ═══════════════════════════════════════ */
+
+.container {
+  margin-bottom: 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ─── Liquid Glass Frame ──────────────
+   Visible glass bezel wrapping the video.
+   Creates the frosted-glass material effect
+   visible against the white page background.
+   ───────────────────────────────────── */
+.glassFrame {
+  position: relative;
+  width: 100%;
+  max-width: 436px;
+  padding: 8px;
+  border-radius: 28px;
+
+  /* Glass material — gradient visible on white page */
+  background: linear-gradient(
+    170deg,
+    rgba(0, 0, 0, 0.06) 0%,
+    rgba(0, 0, 0, 0.025) 35%,
+    rgba(0, 0, 0, 0.01) 55%,
+    rgba(0, 0, 0, 0.03) 75%,
+    rgba(0, 0, 0, 0.07) 100%
+  );
+
+  /* Glass edge */
+  border: 1px solid rgba(0, 0, 0, 0.07);
+
+  /* Layered shadow system */
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.7),
+    inset 0 -0.5px 1px rgba(0, 0, 0, 0.04),
+    0 0 0 0.5px rgba(0, 0, 0, 0.04),
+    0 2px 4px rgba(0, 0, 0, 0.02),
+    0 4px 12px rgba(0, 0, 0, 0.04),
+    0 12px 28px rgba(0, 0, 0, 0.06),
+    0 28px 56px rgba(0, 0, 0, 0.05);
+
+  transition: box-shadow 0.5s ease, transform 0.5s var(--ease-out-expo);
+}
+
+/* Top reflection — light gradient on glass surface */
+.glassFrame::before {
+  content: "";
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  right: 1px;
+  height: 45%;
+  border-radius: 27px 27px 40% 40%;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.55) 0%,
+    rgba(255, 255, 255, 0.15) 40%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Specular highlight — bright line at top edge */
+.glassFrame::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 14%;
+  right: 14%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.95),
+    transparent
+  );
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Hover — glass lifts, shadow deepens */
+.active .glassFrame {
+  transform: translateY(-6px);
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.8),
+    inset 0 -0.5px 1px rgba(0, 0, 0, 0.04),
+    0 0 0 0.5px rgba(0, 0, 0, 0.04),
+    0 4px 8px rgba(0, 0, 0, 0.03),
+    0 8px 20px rgba(0, 0, 0, 0.05),
+    0 24px 48px rgba(0, 0, 0, 0.07),
+    0 48px 80px rgba(0, 0, 0, 0.05);
+}
+
+/* ─── Viewport ─── */
+.viewport {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  aspect-ratio: 748 / 1160;
+  overflow: hidden;
+  background-color: var(--color-mass);
+  border-radius: 20px;
+}
+
+/* ─── Video ─── */
+.video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 2; /* Layer on top of poster */
+}
+
+.videoReady {
+  opacity: 1;
+}
+
+/* ─── Poster ─── */
+.poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 0.5s ease;
+}
+
+.posterHidden {
+  opacity: 0;
+}
+
+/* Subtle light reflection on video surface */
+.videoReflection {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    170deg,
+    rgba(255, 255, 255, 0.07) 0%,
+    transparent 35%,
+    transparent 80%,
+    rgba(0, 0, 0, 0.04) 100%
+  );
+  border-radius: 20px;
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* ─── Placeholder (video unavailable) ─── */
+.placeholder {
+  position: absolute;
+  inset: 0;
+  background-color: var(--color-mass);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  border-radius: 20px;
+}
+
+.scanlines {
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    transparent 3px,
+    rgba(255, 255, 255, 0.035) 3px,
+    rgba(255, 255, 255, 0.035) 4px
+  );
+  pointer-events: none;
+  border-radius: 20px;
+}
+
+.active .scanlines {
+  animation: scanScroll 6s linear infinite;
+}
+
+@keyframes scanScroll {
+  from { background-position: 0 0; }
+  to { background-position: 0 200px; }
+}
+
+.placeholderCenter {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  color: var(--color-ground);
+}
+
+.placeholderIcon {
+  font-size: 2rem;
+  opacity: 0.2;
+}
+
+.placeholderLabel {
+  font-family: var(--font-mono-family);
+  font-size: var(--t-meta);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0.3;
+}
+
+/* ─── Frosted Glass Play Button ─── */
+.playIndicator {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 6;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.active .playIndicator {
+  opacity: 1;
+}
+
+.playIndicatorHidden {
+  opacity: 0 !important;
+  pointer-events: none;
+}
+
+.playBtn {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Frosted glass material */
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(24px) saturate(1.4);
+  -webkit-backdrop-filter: blur(24px) saturate(1.4);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 0.9rem;
+
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.25),
+    inset 0 -0.5px 1px rgba(0, 0, 0, 0.06),
+    0 2px 8px rgba(0, 0, 0, 0.15),
+    0 8px 24px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s var(--ease-out-expo),
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.active .playBtn {
+  transform: scale(1.06);
+  background: rgba(255, 255, 255, 0.22);
+}
+
+/* ─── Progress Track ─── */
+.progressTrack {
+  width: 100%;
+  max-width: 436px;
+  height: 3px;
+  background-color: rgba(0, 0, 0, 0.06);
+  margin-top: 16px;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  width: 100%;
+  background-color: var(--color-mass);
+  transform-origin: left center;
+  transform: scaleX(0);
+  border-radius: 2px;
+}
+
+/* ─── Meta Footer ─── */
+.meta {
+  width: 100%;
+  max-width: 436px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+
+.metaLabel {
+  font-family: var(--font-mono-family);
+  font-size: var(--t-meta);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.35;
+}
+
+.metaDuration {
+  font-family: var(--font-mono-family);
+  font-size: var(--t-meta);
+  letter-spacing: 0.08em;
+  opacity: 0.35;
+}
+
+/* ─── Cursor ─── */
+.viewport,
+.viewport * {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cline x1='12' y1='0' x2='12' y2='24' stroke='%23fff' stroke-width='1'/%3E%3Cline x1='0' y1='12' x2='24' y2='12' stroke='%23fff' stroke-width='1'/%3E%3C/svg%3E")
+    12 12,
+    crosshair;
+}
+
+/* ─── Responsive: Mobile ─── */
+@media (max-width: 767px) {
+  .glassFrame {
+    max-width: 316px;
+    padding: 6px;
+    border-radius: 24px;
+  }
+
+  .viewport {
+    border-radius: 18px;
+  }
+
+  .videoReflection,
+  .placeholder,
+  .scanlines {
+    border-radius: 18px;
+  }
+
+  .progressTrack,
+  .meta {
+    max-width: 316px;
+  }
+
+  .playBtn {
+    width: 48px;
+    height: 48px;
+    font-size: 0.8rem;
+  }
+}
+
+/* ─── Reduced Motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  .video,
+  .glassFrame,
+  .playIndicator,
+  .playBtn {
+    transition: none;
+  }
+
+  .scanlines {
+    animation: none !important;
+  }
+}
