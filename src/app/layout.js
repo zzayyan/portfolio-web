@@ -1,4 +1,5 @@
 import { IBM_Plex_Mono, Inter } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import SmoothScroll from "@/components/SmoothScroll";
 import "./globals.css";
 
@@ -43,6 +44,7 @@ export default function RootLayout({ children }) {
         <SmoothScroll>
           {children}
         </SmoothScroll>
+        <Analytics />
       </body>
     </html>
   );
