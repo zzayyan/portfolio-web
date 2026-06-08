@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════
-   EXPERIENCE — Work History (CV-style)
+   EXPERIENCE — Zigzag Vertical Timeline
    ═══════════════════════════════════════ */
 
 .section {
@@ -9,6 +9,13 @@
   padding-bottom: var(--section-padding);
   padding-left: var(--grid-margin);
   padding-right: var(--grid-margin);
+  overflow: hidden;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
 }
 
 /* ─── Header ─── */
@@ -19,29 +26,118 @@
   letter-spacing: -0.04em;
   line-height: 1;
   color: var(--color-ground);
-  margin-bottom: 48px;
+  margin-bottom: 24px;
   text-align: left;
 }
 
-/* ─── Experience Entry ─── */
-.entry {
+/* ─── Timeline Container ─── */
+.timeline {
+  position: relative;
+  padding: 48px 0;
+  margin-top: 24px;
+}
+
+/* Centered vertical line */
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: translateX(-50%);
+}
+
+/* ─── Timeline Item ─── */
+.item {
+  display: grid;
+  grid-template-columns: 1fr 80px 1fr;
+  align-items: start;
+  margin-bottom: 56px;
+  position: relative;
+}
+
+.item:last-child {
+  margin-bottom: 0;
+}
+
+/* ─── Alternating Alignments ─── */
+
+/* Odd items (Left Content, Right Period) */
+.itemLeft .cardContainer {
+  grid-column: 1;
+  justify-self: end;
+  width: 100%;
   display: flex;
-  flex-direction: row;
-  border-bottom: 1px solid var(--color-ground);
-  padding: 40px 0;
+  justify-content: flex-end;
 }
 
-.entry:first-of-type {
-  border-top: 1px solid var(--color-ground);
+.itemLeft .dotContainer {
+  grid-column: 2;
+  justify-self: center;
 }
 
-/* ─── Left Column — Period + Company Meta ─── */
-.entryMeta {
-  width: 28%;
-  min-width: 200px;
-  padding-right: 48px;
-  border-right: 1px solid var(--color-ground);
-  flex-shrink: 0;
+.itemLeft .periodContainer {
+  grid-column: 3;
+  justify-self: start;
+  padding-left: 24px;
+  text-align: left;
+}
+
+/* Even items (Right Content, Left Period) */
+.itemRight .periodContainer {
+  grid-column: 1;
+  justify-self: end;
+  padding-right: 24px;
+  text-align: right;
+}
+
+.itemRight .dotContainer {
+  grid-column: 2;
+  justify-self: center;
+}
+
+.itemRight .cardContainer {
+  grid-column: 3;
+  justify-self: start;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+/* ─── Dot & Marker ─── */
+.dotContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  position: relative;
+  min-height: 40px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--color-ground);
+  background-color: var(--color-mass);
+  z-index: 2;
+  margin-top: 10px; /* Align with company title line */
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.item:hover .dot {
+  background-color: var(--color-ground);
+  transform: scale(1.3);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+}
+
+/* ─── Period Container ─── */
+.periodContainer {
+  display: flex;
+  flex-direction: column;
+  margin-top: 8px; /* Align with first line of card text */
 }
 
 .period {
@@ -51,7 +147,42 @@
   letter-spacing: 0.08em;
   color: var(--color-ground);
   display: block;
-  margin-bottom: 16px;
+  margin-bottom: 6px;
+}
+
+.location {
+  font-family: var(--font-mono-family);
+  font-size: var(--t-meta);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-ground);
+  opacity: 0.6;
+  display: block;
+}
+
+/* ─── Card Styling ─── */
+.card {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 24px;
+  background-color: rgba(255, 255, 255, 0.01);
+  cursor: pointer;
+  transition: border-color 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+.card:hover {
+  border-color: var(--color-ground);
+  background-color: rgba(255, 255, 255, 0.04);
+  transform: translateY(-2px);
+}
+
+.cardActive {
+  border-color: var(--color-ground);
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
 .company {
@@ -61,23 +192,8 @@
   letter-spacing: -0.02em;
   color: var(--color-ground);
   display: block;
-  margin-bottom: 8px;
-}
-
-.location {
-  font-family: var(--font-mono-family);
-  font-size: var(--t-meta);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--color-ground);
-  opacity: 0.7;
-  display: block;
-}
-
-/* ─── Right Column — Role + Description ─── */
-.entryContent {
-  flex-grow: 1;
-  padding-left: 48px;
+  margin-bottom: 6px;
+  padding-right: 28px; /* Room for indicator */
 }
 
 .role {
@@ -86,12 +202,39 @@
   font-size: var(--t-lead);
   color: var(--color-ground);
   display: block;
-  margin-bottom: 16px;
+  opacity: 0.9;
+  margin-bottom: 0;
+}
+
+/* ─── Toggle Indicator ─── */
+.toggleIndicator {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  font-family: var(--font-mono-family);
+  font-size: 1.25rem;
+  line-height: 1;
+  color: var(--color-ground);
+  opacity: 0.5;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.card:hover .toggleIndicator,
+.cardActive .toggleIndicator {
+  opacity: 1;
+}
+
+/* ─── Expanded Content ─── */
+.expandedContent {
+  padding-top: 16px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.15);
+  margin-top: 16px;
 }
 
 .description {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 .description li {
@@ -102,7 +245,7 @@
   line-height: 1.6;
   padding-left: 20px;
   position: relative;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .description li::before {
@@ -117,12 +260,12 @@
   margin-bottom: 0;
 }
 
-/* ─── Tags ─── */
+/* ─── Tech Tags ─── */
 .tags {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-top: 16px;
+  margin-top: 20px;
 }
 
 .tag {
@@ -133,39 +276,94 @@
   border: 1px solid var(--color-ground);
   padding: 4px 12px;
   color: var(--color-ground);
+  background-color: transparent;
 }
 
 /* ─── Responsive: Tablet ─── */
 @media (max-width: 1279px) {
-  .entryMeta {
-    width: 30%;
-    min-width: 160px;
-    padding-right: 32px;
+  .item {
+    grid-template-columns: 1fr 60px 1fr;
+    margin-bottom: 48px;
   }
 
-  .entryContent {
-    padding-left: 32px;
+  .card {
+    max-width: 420px;
+    padding: 20px;
+  }
+
+  .toggleIndicator {
+    top: 20px;
+    right: 20px;
+  }
+
+  .company {
+    font-size: 1.6rem;
+  }
+
+  .itemLeft .periodContainer {
+    padding-left: 16px;
+  }
+
+  .itemRight .periodContainer {
+    padding-right: 16px;
   }
 }
 
 /* ─── Responsive: Mobile ─── */
 @media (max-width: 767px) {
-  .entry {
+  .timeline::before {
+    left: 16px;
+    transform: none;
+  }
+
+  .item {
+    display: flex;
     flex-direction: column;
-    padding: 24px 0;
+    padding-left: 48px;
+    margin-bottom: 40px;
+    position: relative;
   }
 
-  .entryMeta {
+  .itemLeft .cardContainer,
+  .itemRight .cardContainer {
+    order: 2;
     width: 100%;
-    min-width: unset;
-    border-right: none;
-    border-bottom: 1px solid var(--color-ground);
-    padding-right: 0;
-    padding-bottom: 20px;
-    margin-bottom: 20px;
+    display: block;
+    justify-content: unset;
   }
 
-  .entryContent {
+  .itemLeft .dotContainer,
+  .itemRight .dotContainer {
+    position: absolute;
+    left: 16px;
+    top: 4px; /* Align with first line of periodContainer text */
+    transform: translateX(-50%);
+    min-height: unset;
+    height: auto;
+    grid-column: unset;
+  }
+
+  .dot {
+    margin-top: 0;
+  }
+
+  .itemLeft .periodContainer,
+  .itemRight .periodContainer {
+    order: 1;
     padding-left: 0;
+    padding-right: 0;
+    text-align: left;
+    margin-top: 0;
+    margin-bottom: 12px;
+    grid-column: unset;
+  }
+
+  .card {
+    max-width: 100%;
+    padding: 16px;
+  }
+
+  .company {
+    font-size: 1.4rem;
   }
 }

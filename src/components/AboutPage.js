@@ -129,6 +129,43 @@ export default function AboutPage() {
                 delay: 0.15,
               }}
             >
+              <span className={styles.sectionLabel}>TECH STACK</span>
+              <div className={styles.sectionDivider} />
+              <div className={styles.interestPills}>
+                {[
+                  "Python",
+                  "SQL",
+                  "LangGraph",
+                  "LangChain",
+                  "LangFlow",
+                  "FastAPI",
+                  "FastMCP",
+                  "Amazon Bedrock",
+                  "Google Gemini",
+                  "DeepSeek",
+                  "ChromaDB",
+                  "Redis",
+                  "TensorFlow",
+                  "YOLO",
+                  "Docker",
+                ].map((item) => (
+                  <span key={item} className={styles.pill}>
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+
+            <motion.div
+              className={styles.infoBlock}
+              initial={{ opacity: 0, y: 32 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{
+                duration: 0.6,
+                ease: [0.16, 1, 0.3, 1],
+                delay: 0.2,
+              }}
+            >
               <span className={styles.sectionLabel}>INTERESTS</span>
               <div className={styles.sectionDivider} />
               <div className={styles.interestPills}>
@@ -156,7 +193,7 @@ export default function AboutPage() {
               transition={{
                 duration: 0.6,
                 ease: [0.16, 1, 0.3, 1],
-                delay: 0.2,
+                delay: 0.25,
               }}
             >
               <a href="/#contact" className={styles.ctaButton}>

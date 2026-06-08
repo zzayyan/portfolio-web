@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import styles from "./Experience.module.css";
 import TextReveal from "./TextReveal";
@@ -57,6 +57,47 @@ const EXPERIENCES = [
   },
 ];
 
+function ExperienceCard({ exp }) {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  return (
+    <div
+      className={`${styles.card} ${isExpanded ? styles.cardActive : ""}`}
+      onMouseEnter={() => setIsExpanded(true)}
+      onMouseLeave={() => setIsExpanded(false)}
+      onClick={() => setIsExpanded(!isExpanded)}
+    >
+      <span className={styles.toggleIndicator}>
+        {isExpanded ? "−" : "+"}
+      </span>
+      <span className={styles.company}>{exp.company}</span>
+      <span className={styles.role}>{exp.role}</span>
+
+      <motion.div
+        initial={false}
+        animate={{ height: isExpanded ? "auto" : 0, opacity: isExpanded ? 1 : 0 }}
+        transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+        style={{ overflow: "hidden" }}
+      >
+        <div className={styles.expandedContent}>
+          <ul className={styles.description}>
+            {exp.description.map((item, j) => (
+              <li key={j}>{item}</li>
+            ))}
+          </ul>
+          <div className={styles.tags}>
+            {exp.tags.map((tag) => (
+              <span key={tag} className={styles.tag}>
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      </motion.div>
+    </div>
+  );
+}
+
 export default function Experience() {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-10% 0px" });
@@ -67,45 +108,43 @@ export default function Experience() {
       ref={sectionRef}
       className={`${styles.section} section-dark`}
     >
-      <TextReveal as="h2" lines={["EXPERIENCE"]} className={styles.headerTitle} />
+      <div className={styles.container}>
+        <TextReveal as="h2" lines={["EXPERIENCE"]} className={styles.headerTitle} />
 
-      {EXPERIENCES.map((exp, i) => (
-        <motion.article
-          key={i}
-          className={styles.entry}
-          initial={{ opacity: 0, y: 24 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{
-            duration: 0.5,
-            ease: [0.16, 1, 0.3, 1],
-            delay: i * 0.12,
-          }}
-        >
-          {/* Left — Period + Company */}
-          <div className={styles.entryMeta}>
-            <span className={styles.period}>{exp.period}</span>
-            <span className={styles.company}>{exp.company}</span>
-            <span className={styles.location}>{exp.location}</span>
-          </div>
+        <div className={styles.timeline}>
+          {EXPERIENCES.map((exp, i) => (
+            <motion.article
+              key={i}
+              className={`${styles.item} ${
+                i % 2 === 0 ? styles.itemLeft : styles.itemRight
+              }`}
+              initial={{ opacity: 0, y: 24 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{
+                duration: 0.5,
+                ease: [0.16, 1, 0.3, 1],
+                delay: i * 0.12,
+              }}
+            >
+              {/* Card Container */}
+              <div className={styles.cardContainer}>
+                <ExperienceCard exp={exp} />
+              </div>
 
-          {/* Right — Role + Description */}
-          <div className={styles.entryContent}>
-            <span className={styles.role}>{exp.role}</span>
-            <ul className={styles.description}>
-              {exp.description.map((item, j) => (
-                <li key={j}>{item}</li>
-              ))}
-            </ul>
-            <div className={styles.tags}>
-              {exp.tags.map((tag) => (
-                <span key={tag} className={styles.tag}>
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
-        </motion.article>
-      ))}
+              {/* Dot Container */}
+              <div className={styles.dotContainer}>
+                <div className={styles.dot} />
+              </div>
+
+              {/* Period Container */}
+              <div className={styles.periodContainer}>
+                <span className={styles.period}>{exp.period}</span>
+                <span className={styles.location}>{exp.location}</span>
+              </div>
+            </motion.article>
+          ))}
+        </div>
+      </div>
     </section>
   );
 }
