@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import profileImg from "../../public/profile.png";
+import profileImg from "../../public/profile.jpg";
 import { motion } from "framer-motion";
 import styles from "./About.module.css";
 import TextReveal from "./TextReveal";
